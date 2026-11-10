@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Collecte Sénégal — td_collect</title>
+    <style>
+        :root { font: 16px/1.5 system-ui, sans-serif; color: #17233b; background: #f3f6fa; }
+        * { box-sizing: border-box; }
+        body { margin: 0; }
+        header { padding: 1.5rem max(1rem, calc((100vw - 1200px) / 2)); color: white; background: #102a43; }
+        main { max-width: 1200px; margin: auto; padding: 1.25rem; }
+        .stats, .sources, .records { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1rem; }
+        .panel, .source, .record { padding: 1rem; background: white; border-radius: 12px; box-shadow: 0 2px 12px #16324f12; }
+        .stats strong { display: block; color: #167d7f; font-size: 1.8rem; }
+        .source h3 { margin-top: 0; }
+        .source small, .muted { color: #60758a; }
+        .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: .5rem; }
+        .form-check { padding: .5rem; }
+        label { cursor: pointer; }
+        button { border: 0; border-radius: 8px; padding: .7rem 1rem; color: white; background: #167d7f; font: inherit; cursor: pointer; }
+        button:hover { background: #11666a; }
+        input { margin-right: .4rem; }
+        .alert { padding: .8rem 1rem; margin: 1rem 0; border-radius: 8px; }
+        .info { background: #e4f3f7; } .success { background: #e2f5e9; } .error { background: #fde8e7; }
+        .record { overflow: hidden; padding: 0; }
+        .record img { display: block; width: 100%; height: 190px; object-fit: cover; background: #e8eef4; }
+        .record-body { padding: .85rem; }
+        .record p { margin: .2rem 0 .6rem; }
+        a { color: #075e70; }
+        section { margin: 1.5rem 0; }
+        footer { padding: 1rem 0; color: #60758a; font-size: .9rem; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Collecte de données publiques — Sénégal</h1>
+        <p>Application indépendante du projet Flask principal. Résultats enregistrés dans ce dossier.</p>
+    </header>
+    <main>
+        {% if not apify_configured %}
+            <div class="alert info">Ajoutez votre clé Apify dans le fichier local <code>.env</code>, puis redémarrez cette application. Ne collez pas la clé dans le navigateur ou dans un dépôt public.</div>
+        {% endif %}
+        {% if message %}<div class="alert success" role="status">{{ message }}</div>{% endif %}
+        {% if error %}<div class="alert error" role="alert">{{ error }}</div>{% endif %}
+
+        <div class="stats">
+            <div class="panel"><strong>{{ total_records }}</strong>résultats enregistrés</div>
+            <div class="panel"><strong>{{ saved_results|length }}</strong>sources interrogées</div>
+            <div class="panel"><strong>10 max.</strong>images par source</div>
+        </div>
+
+        <section class="panel">
+            <h2>Lancer une collecte Apify</h2>
+            <p class="muted">Les recherches sont limitées au Sénégal. Le plafond de dépense est appliqué par Actor ; confirmez avant de lancer.</p>
+            <form method="post">
+                <div class="form-grid">
+                    {% for key, source in sources.items() %}
+                        <div class="form-check">
+                            <label>
+                                <input type="checkbox" name="sources" value="{{ key }}">
+                                {{ source.label }}<br>
+                                <small>{{ source.cost_hint }}</small>
+                            </label>
+                        </div>
+                    {% endfor %}
+                </div>
+                <p><label><input type="checkbox" name="confirm_costs" value="yes" required> Je confirme les frais plafonnés affichés.</label></p>
+                <button type="submit">Démarrer la collecte</button>
+            </form>
+        </section>
+
+        {% for key, result in saved_results.items() %}
+            <section>
+                <h2>{{ result.label }} <span class="muted">— {{ result.records|length }} résultat(s)</span></h2>
+                {% if result.error %}
+                    <div class="alert error">{{ result.error }}</div>
+                {% elif result.records %}
+                    <div class="records">
+                        {% for record in result.records[:10] %}
+                            <article class="record">
+                                <a href="{{ record.image_url }}" target="_blank" rel="noopener noreferrer">
+                                    <img src="{{ record.image_url }}" alt="Image publique — {{ result.label }}" loading="lazy" referrerpolicy="no-referrer">
+                                </a>
+                                <div class="record-body">
+                                    <p>{{ record.title or "Sans titre" }}</p>
+                                    {% if record.source_url %}<a href="{{ record.source_url }}" target="_blank" rel="noopener noreferrer">Publication source</a>{% endif %}
+                                </div>
+                            </article>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p class="muted">Aucune image publique trouvée.</p>
+                {% endif %}
+                {% if result.collected_at %}<small class="muted">Collecte : {{ result.collected_at }}</small>{% endif %}
+            </section>
+        {% endfor %}
+        <footer>WhatsApp, Facebook et TikTok sont exclus. Respectez les droits d’auteur, les conditions des plateformes et les règles applicables avant de réutiliser les données.</footer>
+    </main>
+</body>
+</html>
