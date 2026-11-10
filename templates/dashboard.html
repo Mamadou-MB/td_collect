@@ -5,45 +5,123 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Collecte Sénégal — td_collect</title>
     <style>
-        :root { font: 16px/1.5 system-ui, sans-serif; color: #17233b; background: #f3f6fa; }
+        :root {
+            font: 16px/1.55 system-ui, sans-serif;
+            color: #17233b;
+            background: #f3f6fa;
+            --ink: #17233b;
+            --muted: #60758a;
+            --teal: #167d7f;
+            --border: #dce5ed;
+            --surface: #fff;
+        }
         * { box-sizing: border-box; }
-        body { margin: 0; }
-        header { padding: 1.5rem max(1rem, calc((100vw - 1200px) / 2)); color: white; background: #102a43; }
-        main { max-width: 1200px; margin: auto; padding: 1.25rem; }
-        .stats, .sources, .records { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1rem; }
-        .panel, .source, .record { padding: 1rem; background: white; border-radius: 12px; box-shadow: 0 2px 12px #16324f12; }
-        .stats strong { display: block; color: #167d7f; font-size: 1.8rem; }
-        .source h3 { margin-top: 0; }
-        .source small, .muted { color: #60758a; }
+        body { margin: 0; background: radial-gradient(ellipse at 85% 0, #e2f2f1 0, transparent 34rem), #f3f6fa; }
+        header { color: white; background: linear-gradient(120deg, #102a43, #164e63); }
+        .header-inner, main { max-width: 1280px; margin: auto; padding: 0 1.25rem; }
+        .topbar { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid #ffffff25; }
+        .brand { display: flex; align-items: center; gap: .65rem; font-weight: 750; letter-spacing: .01em; }
+        .brand-mark { display: grid; width: 36px; height: 36px; place-items: center; color: #102a43; background: #a7e4d8; border-radius: 12px; }
+        .topnav { display: flex; flex-wrap: wrap; gap: .5rem 1rem; }
+        .topnav a { color: #e4f3f7; text-decoration: none; font-size: .92rem; }
+        .topnav a:hover { color: white; text-decoration: underline; }
+        .hero { display: flex; justify-content: space-between; align-items: center; gap: 2rem; padding: 2rem 0 2.4rem; }
+        .hero-copy { max-width: 710px; }
+        .eyebrow { color: #a7e4d8; font-size: .8rem; font-weight: 750; letter-spacing: .12em; text-transform: uppercase; }
+        .hero h1 { margin: .45rem 0; font-size: clamp(2rem, 4vw, 3.2rem); line-height: 1.12; }
+        .hero p { max-width: 660px; margin: .75rem 0 0; color: #d7e8ee; }
+        .hero-action { flex: 0 0 auto; padding: .8rem 1.1rem; color: #102a43; background: #a7e4d8; border-radius: 10px; font-weight: 750; text-decoration: none; }
+        .hero-action:hover { background: white; }
+        main { padding-top: 1.5rem; padding-bottom: 2rem; }
+        .stats, .source-overview, .records { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+        .panel, .stat, .source-card, .record { background: var(--surface); border: 1px solid #e6edf2; border-radius: 16px; box-shadow: 0 8px 26px #16324f0b; }
+        .stats { margin-bottom: 1.5rem; }
+        .stat { display: flex; align-items: center; gap: .9rem; padding: 1rem 1.1rem; }
+        .stat-icon { display: grid; flex: 0 0 44px; height: 44px; place-items: center; color: #075e70; background: #e4f3f7; border-radius: 13px; font-weight: 800; }
+        .stat strong { display: block; color: var(--ink); font-size: 1.5rem; line-height: 1.25; }
+        .stat span:last-child { color: var(--muted); font-size: .87rem; }
+        .section-heading { display: flex; align-items: end; justify-content: space-between; gap: 1rem; margin: 2rem 0 .85rem; }
+        .section-heading h2 { margin: 0; font-size: 1.35rem; }
+        .section-heading p { margin: .2rem 0 0; color: var(--muted); font-size: .92rem; }
+        .source-card { display: flex; align-items: center; gap: .75rem; min-width: 0; padding: .85rem; color: inherit; text-decoration: none; transition: transform .16s ease, box-shadow .16s ease; }
+        .source-card:hover { transform: translateY(-2px); box-shadow: 0 10px 24px #16324f16; }
+        .source-mark { display: grid; flex: 0 0 42px; height: 42px; place-items: center; border-radius: 13px; background: #e6f4f2; color: #11666a; font-weight: 800; }
+        .source-card-copy { min-width: 0; flex: 1; }
+        .source-card-copy strong { display: block; }
+        .source-card-copy small { color: var(--muted); }
+        .source-count { padding: .25rem .55rem; background: #edf2f7; border-radius: 99px; font-weight: 750; }
+        .panel { padding: 1.15rem; }
+        .docs-panel { display: flex; justify-content: space-between; align-items: center; gap: 1rem; border-color: #cde7e2; background: linear-gradient(110deg, #f0faf7, #fff); }
+        .docs-panel h2 { margin: 0; }
+        .docs-panel p { margin: .25rem 0 0; color: var(--muted); }
+        .docs-links { display: flex; flex-wrap: wrap; gap: .55rem; }
+        .button-link { display: inline-flex; align-items: center; min-height: 42px; padding: .55rem .8rem; color: #075e70; background: white; border: 1px solid #cde1e4; border-radius: 9px; font-weight: 700; text-decoration: none; white-space: nowrap; }
+        .button-link.primary { color: white; background: var(--teal); border-color: var(--teal); }
+        .button-link:hover { filter: brightness(.96); }
+        .source-section { padding: 1.15rem; margin: 1.5rem 0; background: #fff9; border: 1px solid #e1e9ee; border-radius: 18px; }
+        .source-section h2 { margin: 0 0 1rem; }
+        .source-section h2 span { color: var(--muted); font-size: .9rem; font-weight: 500; }
+        .records { grid-template-columns: repeat(auto-fit, minmax(245px, 1fr)); }
+        .record { overflow: hidden; padding: 0; transition: transform .16s ease, box-shadow .16s ease; }
+        .record:hover { transform: translateY(-3px); box-shadow: 0 14px 28px #16324f18; }
+        .record-image { display: block; overflow: hidden; background: #e8eef4; }
+        .record img { display: block; width: 100%; height: 205px; object-fit: cover; transition: transform .25s ease; }
+        .record:hover img { transform: scale(1.025); }
+        .record[hidden], .source-section[hidden], .pagination[hidden] { display: none !important; }
+        .record-body { padding: .95rem; }
+        .record p { margin: .2rem 0 .7rem; font-weight: 650; }
+        .record-meta { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .45rem; color: var(--muted); font-size: .82rem; }
+        .record-link { color: #075e70; font-weight: 700; text-decoration: none; }
+        .record-link:hover { text-decoration: underline; }
         .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: .5rem; }
         .form-check { padding: .5rem; }
         label { cursor: pointer; }
-        button { border: 0; border-radius: 8px; padding: .7rem 1rem; color: white; background: #167d7f; font: inherit; cursor: pointer; }
+        button { border: 0; border-radius: 9px; padding: .7rem 1rem; color: white; background: #167d7f; font: inherit; cursor: pointer; }
         button:hover { background: #11666a; }
         input { margin-right: .4rem; }
-        .alert { padding: .8rem 1rem; margin: 1rem 0; border-radius: 8px; }
+        .alert { padding: .8rem 1rem; margin: 1rem 0; border-radius: 10px; }
         .info { background: #e4f3f7; } .success { background: #e2f5e9; } .error { background: #fde8e7; }
-        .record { overflow: hidden; padding: 0; }
-        .record img { display: block; width: 100%; height: 190px; object-fit: cover; background: #e8eef4; }
-        .record[hidden], .source-section[hidden], .pagination[hidden] { display: none !important; }
-        .record-body { padding: .85rem; }
-        .record p { margin: .2rem 0 .6rem; }
         .toolbar { display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; }
-        .toolbar input, .toolbar select { min-height: 42px; padding: .55rem .7rem; border: 1px solid #c7d2df; border-radius: 8px; font: inherit; }
+        .toolbar input, .toolbar select { min-height: 44px; padding: .55rem .7rem; border: 1px solid #c7d2df; border-radius: 9px; font: inherit; }
         .toolbar input { flex: 1 1 260px; }
         .toolbar select { flex: 0 1 220px; background: white; }
         .pagination { display: flex; justify-content: center; align-items: center; gap: 1rem; margin: 1rem 0; }
         .pagination button:disabled { opacity: .5; cursor: not-allowed; }
-        .live-count { color: #60758a; }
-        a { color: #075e70; }
+        .live-count, .muted { color: var(--muted); }
         section { margin: 1.5rem 0; }
-        footer { padding: 1rem 0; color: #60758a; font-size: .9rem; }
+        footer { padding: 1.5rem 0; color: var(--muted); font-size: .9rem; border-top: 1px solid var(--border); }
+        a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible { outline: 3px solid #e6a700; outline-offset: 3px; }
+        @media (max-width: 700px) {
+            .topbar, .hero, .docs-panel { align-items: flex-start; flex-direction: column; }
+            .hero { gap: 1rem; padding: 1.5rem 0 2rem; }
+            .topnav { gap: .5rem .85rem; }
+            .section-heading { align-items: flex-start; flex-direction: column; }
+        }
+        @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; } }
     </style>
 </head>
 <body>
     <header>
-        <h1>Collecte de données publiques — Sénégal</h1>
-        <p>Publications et images publiques liées au Sénégal · mise à jour par collecte Apify.</p>
+        <div class="header-inner">
+            <div class="topbar">
+                <div class="brand"><span class="brand-mark" aria-hidden="true">S</span><span>Observatoire Sénégal</span></div>
+                <nav class="topnav" aria-label="Navigation principale">
+                    <a href="#sources">Sources</a>
+                    <a href="#explorer">Explorer</a>
+                    <a href="#collecte">Collecte</a>
+                    <a href="{{ url_for('preprocessing_report') }}">Rapport</a>
+                    <a href="{{ url_for('download_preprocessing_notebook') }}">Notebook</a>
+                </nav>
+            </div>
+            <div class="hero">
+                <div class="hero-copy">
+                    <span class="eyebrow">Veille de données publiques</span>
+                    <h1>Le Sénégal, en données.</h1>
+                    <p>Explorez des lieux et publications publics liés au Sénégal, réunis depuis plusieurs plateformes et organisés pour faciliter la consultation.</p>
+                </div>
+                <a class="hero-action" href="{{ url_for('download_public_csv') }}">Télécharger les données&nbsp; ↓</a>
+            </div>
+        </div>
     </header>
     <main>
         {% if not apify_configured %}
@@ -55,24 +133,33 @@
         {% if message %}<div class="alert success" role="status">{{ message }}</div>{% endif %}
         {% if error %}<div class="alert error" role="alert">{{ error }}</div>{% endif %}
 
-        <div class="stats">
-            <div class="panel"><strong id="total-results">{{ total_records }}</strong>résultats affichés</div>
-            <div class="panel"><strong>{{ saved_results|length }}</strong>sources interrogées</div>
-            <div class="panel"><strong>{{ max_results_per_source }} max.</strong>résultats par source</div>
+        <div class="stats" aria-label="Résumé des données">
+            <div class="stat"><span class="stat-icon" aria-hidden="true">#</span><span><strong id="total-results">{{ total_records }}</strong>résultats visibles</span></div>
+            <div class="stat"><span class="stat-icon" aria-hidden="true">◎</span><span><strong>{{ sources_with_results }} / {{ sources|length }}</strong>sources avec résultats</span></div>
+            <div class="stat"><span class="stat-icon" aria-hidden="true">50</span><span><strong>{{ max_results_per_source }}</strong>maximum par source</span></div>
         </div>
-        <p><a href="{{ url_for('download_public_csv') }}">Télécharger le CSV public des résultats</a></p>
-        <section class="panel" aria-label="Documentation de la collecte">
-            <h2>Comprendre les données</h2>
-            <p>Consultez le rapport de traitement ou téléchargez le notebook pédagogique sans code qui décrit le prétraitement et les contrôles de qualité.</p>
-            <p>
-                <a href="{{ url_for('preprocessing_report') }}">Lire le rapport détaillé</a>
-                ·
-                <a href="{{ url_for('download_preprocessing_notebook') }}">Télécharger le notebook (.ipynb)</a>
-            </p>
+        <div class="section-heading" id="sources">
+            <div><h2>Vos sources</h2><p>Un aperçu rapide du nombre de résultats disponibles.</p></div>
+        </div>
+        <div class="source-overview" aria-label="Résultats par source">
+            {% for key, source in sources.items() %}
+                <a class="source-card" href="#source-{{ key }}" data-source-target="{{ key }}">
+                    <span class="source-mark" aria-hidden="true">{{ source.label[:1] }}</span>
+                    <span class="source-card-copy"><strong>{{ source.label }}</strong><small>{% if source_counts[key] %}Données disponibles{% else %}Aucun résultat dans cette collecte{% endif %}</small></span>
+                    <span class="source-count">{{ source_counts[key] }}</span>
+                </a>
+            {% endfor %}
+        </div>
+        <section class="panel docs-panel" aria-label="Documentation de la collecte">
+            <div><h2>Comprendre les données</h2><p>Consultez les étapes de traitement et les limites de cet instantané.</p></div>
+            <div class="docs-links">
+                <a class="button-link" href="{{ url_for('preprocessing_report') }}">Lire le rapport</a>
+                <a class="button-link primary" href="{{ url_for('download_preprocessing_notebook') }}">Ouvrir le notebook</a>
+            </div>
         </section>
 
-        <section class="panel" aria-label="Recherche et filtres">
-            <h2>Explorer les résultats</h2>
+        <section class="panel" id="explorer" aria-label="Recherche et filtres">
+            <div class="section-heading"><div><h2>Explorer les résultats</h2><p>Recherchez un lieu ou filtrez par plateforme.</p></div></div>
             <div class="toolbar">
                 <input type="search" id="search-results" placeholder="Rechercher un titre ou un mot-clé…" aria-label="Rechercher dans les résultats">
                 <select id="source-filter" aria-label="Filtrer par source">
@@ -85,7 +172,7 @@
             </div>
         </section>
 
-        <section class="panel">
+        <section class="panel" id="collecte">
             <h2>Lancer une collecte Apify</h2>
             <p class="muted">Jusqu’à {{ max_results_per_source }} résultats par plateforme. Les frais réels varient selon les Actors ; plafond strict cumulé : 0,90 $ par collecte.</p>
             <form method="post">
@@ -107,20 +194,23 @@
         </section>
 
         {% for key, result in saved_results.items() %}
-            <section class="source-section" data-section="{{ key }}">
-                <h2>{{ result.label }} <span class="muted">— {{ result.records|length }} résultat(s)</span></h2>
+            <section class="source-section" data-section="{{ key }}" id="source-{{ key }}">
+                <h2>{{ result.label }} <span>— {{ result.records|length }} résultat(s)</span></h2>
                 {% if result.error %}
                     <div class="alert error">{{ result.error }}</div>
                 {% elif result.records %}
                     <div class="records">
                         {% for record in result.records[:max_results_per_source] %}
                             <article class="record" data-source="{{ key }}">
-                                <a href="{{ record.image_url }}" target="_blank" rel="noopener noreferrer">
+                                <a class="record-image" href="{{ record.image_url }}" target="_blank" rel="noopener noreferrer">
                                     <img src="{{ record.image_url }}" alt="Image publique — {{ result.label }}" loading="lazy" referrerpolicy="no-referrer">
                                 </a>
                                 <div class="record-body">
                                     <p>{{ record.title or "Sans titre" }}</p>
-                                    {% if record.source_url %}<a href="{{ record.source_url }}" target="_blank" rel="noopener noreferrer">Publication source</a>{% endif %}
+                                    <div class="record-meta">
+                                        <span>{% if record.published_at %}{{ record.published_at }}{% else %}Date non indiquée{% endif %}</span>
+                                        {% if record.source_url %}<a class="record-link" href="{{ record.source_url }}" target="_blank" rel="noopener noreferrer">Voir la publication&nbsp; ↗</a>{% endif %}
+                                    </div>
                                 </div>
                             </article>
                         {% endfor %}
@@ -149,6 +239,7 @@
             const pageStatus = document.getElementById("page-status");
             const visibleCount = document.getElementById("visible-count");
             const totalResults = document.getElementById("total-results");
+            const sourceCards = [...document.querySelectorAll(".source-card[data-source-target]")];
             let currentPage = 0;
             let matches = cards;
 
@@ -190,6 +281,22 @@
                 currentPage += 1;
                 render();
             });
+            for (const sourceCard of sourceCards) {
+                sourceCard.addEventListener("click", (event) => {
+                    event.preventDefault();
+                    search.value = "";
+                    sourceFilter.value = sourceCard.dataset.sourceTarget;
+                    currentPage = 0;
+                    render();
+                    const target = document.getElementById(`source-${sourceCard.dataset.sourceTarget}`);
+                    if (target && !target.hidden) {
+                        target.scrollIntoView({ behavior: "smooth", block: "start" });
+                        history.replaceState(null, "", sourceCard.getAttribute("href"));
+                    } else {
+                        document.getElementById("explorer").scrollIntoView({ behavior: "smooth", block: "start" });
+                    }
+                });
+            }
             render();
         })();
     </script>

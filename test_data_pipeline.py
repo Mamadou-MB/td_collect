@@ -58,20 +58,18 @@ class DataPipelineTests(unittest.TestCase):
     def test_actor_input_caps_result_count_at_fifty(self):
         with patch.dict(
             "os.environ",
-            {"APIFY_INPUT_INSTAGRAM": json.dumps({"maxItems": 250})},
+            {"APIFY_INPUT_INSTAGRAM": json.dumps({"resultsLimit": 250})},
             clear=False,
         ):
             self.assertEqual(
-                _actor_input("instagram")["maxItems"],
+                _actor_input("instagram")["resultsLimit"],
                 MAX_RESULTS_PER_SOURCE,
             )
         self.assertEqual(
-            _actor_input("instagram")["directUrls"],
-            [
-                "https://www.instagram.com/explore/tags/senegal/",
-                "https://www.instagram.com/explore/tags/dakar/",
-            ],
+            _actor_input("instagram")["hashtags"],
+            ["senegal", "dakar"],
         )
+        self.assertEqual(_actor_input("instagram")["resultsType"], "posts")
 
     def test_normalize_items_deduplicates_repeated_publication_urls(self):
         items = [
@@ -168,6 +166,19 @@ class DataPipelineTests(unittest.TestCase):
             urlopen.call_args.args[0].full_url,
         )
 
+    def test_instagram_uses_hashtag_actor_by_default(self):
+        response = unittest.mock.MagicMock()
+        response.__enter__.return_value.read.return_value = b"[]"
+        with patch.dict(os.environ, {"APIFY_ACTOR_INSTAGRAM": ""}, clear=False), patch(
+            "data_pipeline.urllib.request.urlopen",
+            return_value=response,
+        ) as urlopen:
+            self.assertEqual(_run_actor("instagram", "test-secret-token"), [])
+        self.assertIn(
+            "/acts/apify~instagram-hashtag-scraper/",
+            urlopen.call_args.args[0].full_url,
+        )
+
     def test_save_and_load_results(self):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "instance" / "collectes.json"
@@ -260,11 +271,13 @@ class DataPipelineTests(unittest.TestCase):
         self.assertIn(b"Public test result", dashboard.data)
         self.assertIn(b"Explorer les r", dashboard.data)
         self.assertIn(b"previous-page", dashboard.data)
-        self.assertIn(b"50 max.", dashboard.data)
+        self.assertIn(b"<strong>50</strong>", dashboard.data)
+        self.assertIn(b"Vos sources", dashboard.data)
+        self.assertIn(b"Le S\xc3\xa9n\xc3\xa9gal, en donn\xc3\xa9es.", dashboard.data)
         self.assertEqual(download.status_code, 200)
         self.assertIn(b"YouTube,Public test result", download_data)
 
-    def test_dashboard_links_to_report_and_code_free_notebook(self):
+    def test_dashboard_links_to_report_and_executable_notebook(self):
         app.config["TESTING"] = True
         with app.test_client() as client:
             dashboard = client.get("/")
@@ -279,7 +292,11 @@ class DataPipelineTests(unittest.TestCase):
         self.assertIn("répétitions retirées".encode("utf-8"), report.data)
         self.assertEqual(notebook.status_code, 200)
         self.assertIn("application/x-ipynb+json", notebook.content_type)
-        self.assertIn(b"47", notebook.data)
+        notebook_content = json.loads(notebook.data)
+        code_cells = [
+            cell for cell in notebook_content["cells"] if cell["cell_type"] == "code"
+        ]
+        self.assertGreaterEqual(len(code_cells), 3)
         dashboard.close()
         report.close()
         notebook.close()

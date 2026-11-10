@@ -34,16 +34,13 @@ SOURCES = {
     },
     "instagram": {
         "label": "Instagram",
-        "actor_id": "apify~instagram-scraper",
+        "actor_id": "apify~instagram-hashtag-scraper",
         "actor_env": "APIFY_ACTOR_INSTAGRAM",
         "input_env": "APIFY_INPUT_INSTAGRAM",
         "max_charge_usd": "0.10",
-        "cost_hint": "plafond 0,10 $ par collecte",
+        "cost_hint": "tarif gratuit affiché : 0,0026 $/résultat ; plafond 0,10 $",
         "default_input": {
-            "directUrls": [
-                "https://www.instagram.com/explore/tags/senegal/",
-                "https://www.instagram.com/explore/tags/dakar/",
-            ],
+            "hashtags": ["senegal", "dakar"],
             "resultsType": "posts",
             "resultsLimit": MAX_RESULTS_PER_SOURCE,
         },

@@ -26,17 +26,21 @@ Chaque Actor est limité à 50 résultats et chaque collecte applique le plafond
 de dépense configuré dans `data_pipeline.py`.
 
 Le tableau de bord propose `/rapport` pour lire le compte rendu du nettoyage et
-`/notebook-pretraitement.ipynb` pour télécharger un notebook Jupyter narratif
-sans cellule de code. Il documente l'instantané actuel (78 lignes avant
+`/notebook-pretraitement.ipynb` pour télécharger un notebook Jupyter exécutable,
+avec des cellules Python qui réutilisent les fonctions de nettoyage du projet.
+Ouvrez-le depuis un clone du dépôt et exécutez les cellules dans l'ordre. Il
+documente l'instantané actuel (78 lignes avant
 déduplication, 47 lignes uniques après) ; ces chiffres ne changent pas
 automatiquement après une nouvelle collecte.
 
-Les recherches Instagram utilisent les URL publiques de hashtags `senegal` et
-`dakar`. X utilise l’Actor `apidojo~twitter-scraper-lite` ; les autres Actors
-restent inchangés car ils sont toujours maintenus. Si `APIFY_ACTOR_X` ou
-`APIFY_INPUT_INSTAGRAM` est défini dans `.env` ou sur Render, cette valeur
-remplace celle du code : mettez-la à jour ou supprimez-la pour appliquer les
-nouveaux réglages.
+Instagram utilise l'Actor [Instagram Hashtag Scraper](https://apify.com/apify/instagram-hashtag-scraper)
+avec les hashtags `senegal` et `dakar`. Le tarif gratuit actuellement indiqué
+est de 0,0026 USD par résultat ; le plafond du pipeline reste fixé à 0,10 USD
+pour cette source. X utilise l'Actor `apidojo~twitter-scraper-lite` ; les autres
+Actors restent inchangés. Si `APIFY_ACTOR_INSTAGRAM` ou
+`APIFY_INPUT_INSTAGRAM` est défini sur Render, sa valeur remplace celle du code :
+mettez ces variables à jour avec le nouvel Actor et le schéma `hashtags`, ou
+supprimez-les pour utiliser les paramètres par défaut.
 
 ## Déploiement Docker
 

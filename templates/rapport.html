@@ -31,9 +31,9 @@
 <body>
     <header>
         <h1>Rapport de collecte et de prétraitement</h1>
-        <p>Collecte Sénégal · document no-code · instantané vérifié du 10 novembre 2026</p>
+        <p>Collecte Sénégal · rapport et notebook exécutable · instantané vérifié du 10 novembre 2026</p>
         <nav class="actions" aria-label="Documents du projet">
-            <a class="button" href="{{ url_for('download_preprocessing_notebook') }}">Télécharger le notebook sans code</a>
+            <a class="button" href="{{ url_for('download_preprocessing_notebook') }}">Télécharger le notebook avec code</a>
             <a class="button secondary" href="{{ url_for('dashboard') }}">Retour au tableau de bord</a>
             <a class="button secondary" href="{{ url_for('download_public_csv') }}">Télécharger le CSV nettoyé</a>
         </nav>
@@ -41,7 +41,7 @@
     <main>
         <section>
             <h2>Résumé du travail</h2>
-            <p>Les résultats publics de Google Maps, YouTube, X et Pinterest ont été harmonisés et dédupliqués. Instagram fait partie des sources prévues, mais n'a renvoyé aucun résultat exploitable dans cet instantané. Le notebook joint décrit les étapes et les contrôles sans exposer de code source.</p>
+            <p>Les résultats publics de Google Maps, YouTube, X et Pinterest ont été harmonisés et dédupliqués. Instagram fait partie des sources prévues, mais n'a renvoyé aucun résultat exploitable dans cet instantané. Le notebook joint contient du code Python exécutable qui réutilise le prétraitement du projet sans écraser les fichiers sources.</p>
             <div class="stats">
                 <div class="stat"><strong>78 → 47</strong>lignes après déduplication</div>
                 <div class="stat"><strong>31</strong>répétitions retirées</div>
@@ -55,7 +55,7 @@
                 <thead><tr><th>Source</th><th>Avant</th><th>Après</th><th>Observations</th></tr></thead>
                 <tbody>
                     <tr><td>Google Maps</td><td>18</td><td>18</td><td>18 dates absentes sur des fiches de lieux.</td></tr>
-                    <tr><td>Instagram</td><td>0</td><td>0</td><td>Aucun résultat image renvoyé.</td></tr>
+                    <tr><td>Instagram</td><td>0</td><td>0</td><td>Actor remplacé par l'<a href="https://apify.com/apify/instagram-hashtag-scraper" target="_blank" rel="noopener noreferrer">Instagram Hashtag Scraper</a> ; aucun résultat n'a encore été récolté avec cette nouvelle configuration.</td></tr>
                     <tr><td>YouTube</td><td>20</td><td>20</td><td>Aucune répétition détectée dans cet export.</td></tr>
                     <tr><td>X</td><td>20</td><td>4</td><td>16 lignes répétées supprimées.</td></tr>
                     <tr><td>Pinterest</td><td>20</td><td>5</td><td>15 lignes répétées supprimées ; 2 titres absents.</td></tr>
@@ -85,7 +85,7 @@
                 <li>Les termes « Sénégal » et « Dakar » dans une recherche ne garantissent pas à eux seuls que tout le contenu concerne exclusivement le Sénégal.</li>
                 <li>Respecter les conditions des plateformes, les droits d'auteur et les règles relatives aux données personnelles avant toute réutilisation.</li>
             </ul>
-            <p class="note"><strong>À retenir :</strong> le flux est plafonné à 50 résultats par source, mais la qualité et le nombre dépendent des réponses des plateformes. Instagram n'a pas contribué à cet instantané. Le plafond de dépense configuré est de 0,90 $ par lancement ; aucune nouvelle collecte n'est déclenchée par la consultation de ce rapport.</p>
+            <p class="note"><strong>À retenir :</strong> le flux est plafonné à 50 résultats par source, mais la qualité et le nombre dépendent des réponses des plateformes. Instagram n'a pas contribué à cet instantané. Son nouvel Actor affiche un tarif gratuit de 0,0026 $ par résultat ; le plafond de cette source reste 0,10 $, dans un plafond total de 0,90 $ par lancement. Aucune nouvelle collecte n'est déclenchée par la consultation de ce rapport.</p>
         </section>
         <footer>Rapport descriptif des fichiers fournis par le projet. Il explique les opérations de prétraitement et les limites observées, sans constituer une validation indépendante des contenus originaux.</footer>
     </main>

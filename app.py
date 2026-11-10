@@ -84,12 +84,18 @@ def dashboard():
     total_records = sum(
         len(result.get("records") or []) for result in saved_results.values()
     )
+    source_counts = {
+        key: len((saved_results.get(key) or {}).get("records") or [])
+        for key in SOURCES
+    }
     return render_template(
         "dashboard.html",
         sources=SOURCES,
         max_results_per_source=MAX_RESULTS_PER_SOURCE,
         saved_results=saved_results,
         total_records=total_records,
+        source_counts=source_counts,
+        sources_with_results=sum(count > 0 for count in source_counts.values()),
         message=message,
         error=error,
         apify_configured=bool(os.environ.get("APIFY_TOKEN", "").strip()),
