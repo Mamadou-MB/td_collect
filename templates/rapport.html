@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Rapport de prétraitement — Collecte Sénégal</title>
+    <style>
+        :root { font: 16px/1.65 system-ui, sans-serif; color: #17233b; background: #f3f6fa; }
+        * { box-sizing: border-box; }
+        body { margin: 0; }
+        header { padding: 1.5rem max(1rem, calc((100vw - 1000px) / 2)); color: white; background: #102a43; }
+        main { max-width: 1000px; margin: auto; padding: 1.25rem; }
+        section, .stat, .note { background: white; border-radius: 12px; box-shadow: 0 2px 12px #16324f12; }
+        section { margin: 1rem 0; padding: 1.25rem; }
+        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: .75rem; }
+        .stat { padding: 1rem; }
+        .stat strong { display: block; color: #167d7f; font-size: 1.6rem; }
+        .actions { display: flex; flex-wrap: wrap; gap: .75rem; }
+        .button { display: inline-block; padding: .65rem 1rem; border-radius: 8px; color: white; background: #167d7f; text-decoration: none; }
+        .button.secondary { color: #075e70; background: #e4f3f7; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: .55rem; border-bottom: 1px solid #dce5ed; text-align: left; }
+        th { background: #f3f6fa; }
+        .note { padding: 1rem; background: #e4f3f7; }
+        .muted, footer { color: #60758a; }
+        footer { padding: 1rem 0; font-size: .9rem; }
+        a:focus-visible { outline: 3px solid #e6a700; outline-offset: 3px; }
+        @media (max-width: 600px) { table { font-size: .9rem; } th, td { padding: .4rem; } }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Rapport de collecte et de prétraitement</h1>
+        <p>Collecte Sénégal · document no-code · instantané vérifié du 10 novembre 2026</p>
+        <nav class="actions" aria-label="Documents du projet">
+            <a class="button" href="{{ url_for('download_preprocessing_notebook') }}">Télécharger le notebook sans code</a>
+            <a class="button secondary" href="{{ url_for('dashboard') }}">Retour au tableau de bord</a>
+            <a class="button secondary" href="{{ url_for('download_public_csv') }}">Télécharger le CSV nettoyé</a>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2>Résumé du travail</h2>
+            <p>Les résultats publics de Google Maps, YouTube, X et Pinterest ont été harmonisés et dédupliqués. Instagram fait partie des sources prévues, mais n'a renvoyé aucun résultat exploitable dans cet instantané. Le notebook joint décrit les étapes et les contrôles sans exposer de code source.</p>
+            <div class="stats">
+                <div class="stat"><strong>78 → 47</strong>lignes après déduplication</div>
+                <div class="stat"><strong>31</strong>répétitions retirées</div>
+                <div class="stat"><strong>50</strong>résultats maximum par source</div>
+                <div class="stat"><strong>0,90 $</strong>plafond cumulé configuré par lancement</div>
+            </div>
+        </section>
+        <section>
+            <h2>Résultats par source</h2>
+            <table>
+                <thead><tr><th>Source</th><th>Avant</th><th>Après</th><th>Observations</th></tr></thead>
+                <tbody>
+                    <tr><td>Google Maps</td><td>18</td><td>18</td><td>18 dates absentes sur des fiches de lieux.</td></tr>
+                    <tr><td>Instagram</td><td>0</td><td>0</td><td>Aucun résultat image renvoyé.</td></tr>
+                    <tr><td>YouTube</td><td>20</td><td>20</td><td>Aucune répétition détectée dans cet export.</td></tr>
+                    <tr><td>X</td><td>20</td><td>4</td><td>16 lignes répétées supprimées.</td></tr>
+                    <tr><td>Pinterest</td><td>20</td><td>5</td><td>15 lignes répétées supprimées ; 2 titres absents.</td></tr>
+                    <tr><th>Total</th><th>78</th><th>47</th><th>Résultats provenant de quatre sources.</th></tr>
+                </tbody>
+            </table>
+        </section>
+        <section>
+            <h2>Procédure expliquée</h2>
+            <ol>
+                <li><strong>Harmoniser les colonnes :</strong> source, titre, date de publication, URL de publication, URL de l'image et chemin de capture locale.</li>
+                <li><strong>Nettoyer le texte :</strong> normalisation Unicode, suppression des caractères de contrôle et des espaces superflus. Les titres absents restent vides.</li>
+                <li><strong>Contrôler les liens :</strong> ne retenir que des URL HTTPS valides vers des hôtes publics ; retirer les liens locaux, privés, non sécurisés ou utilisant un autre protocole.</li>
+                <li><strong>Normaliser les dates :</strong> convertir les dates lisibles au format ISO 8601 en UTC ; laisser vides les dates manquantes ou illisibles.</li>
+                <li><strong>Dédupliquer :</strong> utiliser la source et l'URL de publication ; si cette dernière manque, utiliser l'URL de l'image. Une publication identique n'est conservée qu'une fois.</li>
+                <li><strong>Protéger l'ouverture dans un tableur :</strong> neutraliser les titres commençant par des caractères qui peuvent être interprétés comme des formules.</li>
+                <li><strong>Protéger les chemins :</strong> retirer les chemins absolus ou suspects et vérifier l'existence des captures locales. Aucun chemin local n'est publié dans le CSV public.</li>
+            </ol>
+        </section>
+        <section>
+            <h2>Contrôles de qualité et limites</h2>
+            <ul>
+                <li>47 lignes uniques ; 47 liens de publication HTTPS et 47 liens d'image HTTPS dans le CSV nettoyé.</li>
+                <li>23 dates sont absentes : 18 pour Google Maps et 5 pour Pinterest. Ces valeurs ne sont pas inventées.</li>
+                <li>Deux titres Pinterest sont manquants. Les autres titres présents ont été conservés.</li>
+                <li>46 captures locales sur 47 références locales ont été vérifiées présentes ; les chemins locaux sont absents de l'export public.</li>
+                <li>Les termes « Sénégal » et « Dakar » dans une recherche ne garantissent pas à eux seuls que tout le contenu concerne exclusivement le Sénégal.</li>
+                <li>Respecter les conditions des plateformes, les droits d'auteur et les règles relatives aux données personnelles avant toute réutilisation.</li>
+            </ul>
+            <p class="note"><strong>À retenir :</strong> le flux est plafonné à 50 résultats par source, mais la qualité et le nombre dépendent des réponses des plateformes. Instagram n'a pas contribué à cet instantané. Le plafond de dépense configuré est de 0,90 $ par lancement ; aucune nouvelle collecte n'est déclenchée par la consultation de ce rapport.</p>
+        </section>
+        <footer>Rapport descriptif des fichiers fournis par le projet. Il explique les opérations de prétraitement et les limites observées, sans constituer une validation indépendante des contenus originaux.</footer>
+    </main>
+</body>
+</html>

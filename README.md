@@ -25,6 +25,12 @@ La collecte se fait sur demande, avec confirmation explicite des coûts affiché
 Chaque Actor est limité à 50 résultats et chaque collecte applique le plafond
 de dépense configuré dans `data_pipeline.py`.
 
+Le tableau de bord propose `/rapport` pour lire le compte rendu du nettoyage et
+`/notebook-pretraitement.ipynb` pour télécharger un notebook Jupyter narratif
+sans cellule de code. Il documente l'instantané actuel (78 lignes avant
+déduplication, 47 lignes uniques après) ; ces chiffres ne changent pas
+automatiquement après une nouvelle collecte.
+
 Les recherches Instagram utilisent les URL publiques de hashtags `senegal` et
 `dakar`. X utilise l’Actor `apidojo~twitter-scraper-lite` ; les autres Actors
 restent inchangés car ils sont toujours maintenus. Si `APIFY_ACTOR_X` ou
@@ -68,8 +74,9 @@ collectées ; ne collectez ou ne publiez que ce que vous êtes autorisé à trai
 ## Render
 
 Le dépôt contient `public/collectes.json` et `public/donnees_scrappees.csv` pour
-afficher les résultats initiaux après le déploiement. Le CSV et ses textes/liens
-seront publics sur le site.
+afficher les résultats initiaux après le déploiement, ainsi que le notebook de
+prétraitement dans `notebooks/`. Le rapport est accessible sur `/rapport`. Le
+CSV et ses textes/liens seront publics sur le site.
 
 La collecte est réglée sur un maximum de 50 résultats uniques par source. Les
 doublons de liens de publication sont supprimés et les dates/URL du CSV sont

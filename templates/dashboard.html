@@ -61,6 +61,15 @@
             <div class="panel"><strong>{{ max_results_per_source }} max.</strong>résultats par source</div>
         </div>
         <p><a href="{{ url_for('download_public_csv') }}">Télécharger le CSV public des résultats</a></p>
+        <section class="panel" aria-label="Documentation de la collecte">
+            <h2>Comprendre les données</h2>
+            <p>Consultez le rapport de traitement ou téléchargez le notebook pédagogique sans code qui décrit le prétraitement et les contrôles de qualité.</p>
+            <p>
+                <a href="{{ url_for('preprocessing_report') }}">Lire le rapport détaillé</a>
+                ·
+                <a href="{{ url_for('download_preprocessing_notebook') }}">Télécharger le notebook (.ipynb)</a>
+            </p>
+        </section>
 
         <section class="panel" aria-label="Recherche et filtres">
             <h2>Explorer les résultats</h2>

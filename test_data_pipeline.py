@@ -264,6 +264,26 @@ class DataPipelineTests(unittest.TestCase):
         self.assertEqual(download.status_code, 200)
         self.assertIn(b"YouTube,Public test result", download_data)
 
+    def test_dashboard_links_to_report_and_code_free_notebook(self):
+        app.config["TESTING"] = True
+        with app.test_client() as client:
+            dashboard = client.get("/")
+            report = client.get("/rapport")
+            notebook = client.get("/notebook-pretraitement.ipynb")
+
+        self.assertEqual(dashboard.status_code, 200)
+        self.assertIn(b"/rapport", dashboard.data)
+        self.assertIn(b"/notebook-pretraitement.ipynb", dashboard.data)
+        self.assertEqual(report.status_code, 200)
+        self.assertIn(b"<strong>31</strong>", report.data)
+        self.assertIn("répétitions retirées".encode("utf-8"), report.data)
+        self.assertEqual(notebook.status_code, 200)
+        self.assertIn("application/x-ipynb+json", notebook.content_type)
+        self.assertIn(b"47", notebook.data)
+        dashboard.close()
+        report.close()
+        notebook.close()
+
     def test_normalize_items_uses_fifty_result_default_cap(self):
         items = [{"imageUrl": f"https://cdn.example/image-{index}.jpg"} for index in range(60)]
         records = normalize_items(items, "YouTube")

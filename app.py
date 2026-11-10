@@ -26,6 +26,9 @@ COLLECTIONS_FILE = Path(
 )
 PUBLIC_SEED_FILE = PROJECT_DIR / "public" / "collectes.json"
 PUBLIC_CSV_FILE = PROJECT_DIR / "public" / "donnees_scrappees.csv"
+PREPROCESSING_NOTEBOOK_FILE = (
+    PROJECT_DIR / "notebooks" / "pretraitement_donnees_senegal.ipynb"
+)
 
 
 def _dashboard_results():
@@ -97,6 +100,23 @@ def dashboard():
 @app.get("/healthz")
 def health_check():
     return jsonify(status="ok")
+
+
+@app.get("/rapport")
+def preprocessing_report():
+    return render_template("rapport.html")
+
+
+@app.get("/notebook-pretraitement.ipynb")
+def download_preprocessing_notebook():
+    if not PREPROCESSING_NOTEBOOK_FILE.is_file():
+        abort(404)
+    return send_file(
+        PREPROCESSING_NOTEBOOK_FILE,
+        mimetype="application/x-ipynb+json",
+        as_attachment=True,
+        download_name="pretraitement_donnees_senegal.ipynb",
+    )
 
 
 @app.get("/donnees_scrappees.csv")
