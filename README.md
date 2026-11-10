@@ -33,17 +33,14 @@ documente l'instantané actuel (78 lignes avant
 déduplication, 47 lignes uniques après) ; ces chiffres ne changent pas
 automatiquement après une nouvelle collecte.
 
-Instagram utilise désormais l'Actor [Instagram Search Scraper](https://apify.com/apify/instagram-search-scraper),
-configuré pour les lieux avec `search="Dakar, Senegal"`, `searchType="place"`
-et une limite de 50. Ce type de recherche fournit des lieux et leurs publications
-récentes, contrairement à la recherche de hashtags qui fournit principalement
-des métadonnées de hashtags. Le tarif gratuit actuellement indiqué est de 0,0027 USD par résultat ;
-le plafond strict du pipeline reste de 0,10 USD pour cette source (environ 37
-résultats au plus à ce tarif). X utilise l'Actor `apidojo~twitter-scraper-lite` ;
-les autres Actors restent inchangés. Si `APIFY_ACTOR_INSTAGRAM` ou
-`APIFY_INPUT_INSTAGRAM` est défini sur Render, cette valeur remplace celle du
-code : mettez ces variables à jour avec l'identifiant et le schéma de recherche
-ci-dessus, ou supprimez-les pour utiliser les paramètres par défaut.
+Instagram est remplacé par Reddit, une plateforme distincte. La collecte utilise
+l'Actor [Reddit Scraper](https://apify.com/harshmaur/reddit-scraper) avec les
+termes `Senegal` et `Sénégal`. Elle ne collecte que les publications (pas les
+commentaires ni les communautés), jusqu'à 17 par terme. Le tarif affiché est de
+0,002 USD par publication, plus 0,02 USD au démarrage ; le plafond du pipeline
+reste strictement fixé à 0,10 USD pour cette source. Les paramètres sont
+configurables avec `APIFY_ACTOR_REDDIT` et `APIFY_INPUT_REDDIT`. X utilise
+l'Actor `apidojo~twitter-scraper-lite` ; les autres sources restent inchangées.
 
 ## Déploiement Docker
 

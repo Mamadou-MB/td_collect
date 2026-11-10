@@ -24,7 +24,7 @@ CSV_FIELDS = (
 )
 ALLOWED_IMAGE_HOSTS = {
     "google_maps": ("googleusercontent.com", "gstatic.com"),
-    "instagram": ("cdninstagram.com", "fbcdn.net"),
+    "reddit": ("redd.it", "redditmedia.com"),
     "youtube": ("ytimg.com", "ggpht.com"),
     "x": ("twimg.com",),
     "pinterest": ("pinimg.com",),

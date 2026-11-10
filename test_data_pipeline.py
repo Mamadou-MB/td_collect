@@ -14,7 +14,7 @@ from data_pipeline import (
     save_results,
 )
 import app as app_module
-from export_collection import clean_csv_rows
+from export_collection import _download_image, clean_csv_rows
 
 app = app_module.app
 
@@ -43,33 +43,44 @@ class DataPipelineTests(unittest.TestCase):
         )
         self.assertTrue(all(record["source"] == "Google Maps" for record in records))
         invalid_urls = normalize_items(
-            [{"imageUrl": "https://127.0.0.1/image.jpg"}], "Instagram"
+            [{"imageUrl": "https://127.0.0.1/image.jpg"}], "Reddit"
         )
         self.assertEqual(invalid_urls, [])
-        instagram_records = normalize_items(
-            [{"displayUrl": "https://cdn.example/instagram-post.jpg"}],
-            "Instagram",
+        reddit_records = normalize_items(
+            [
+                {
+                    "postUrl": "https://www.reddit.com/r/Senegal/comments/123/post/",
+                    "images": ["https://i.redd.it/senegal-post.jpg"],
+                    "createdAt": "2026-11-10T12:00:00Z",
+                }
+            ],
+            "Reddit",
         )
         self.assertEqual(
-            instagram_records[0]["image_url"],
-            "https://cdn.example/instagram-post.jpg",
+            reddit_records[0]["image_url"],
+            "https://i.redd.it/senegal-post.jpg",
+        )
+        self.assertEqual(
+            reddit_records[0]["source_url"],
+            "https://www.reddit.com/r/Senegal/comments/123/post/",
         )
 
     def test_actor_input_caps_result_count_at_fifty(self):
         with patch.dict(
             "os.environ",
-            {"APIFY_INPUT_INSTAGRAM": json.dumps({"searchLimit": 250})},
+            {"APIFY_INPUT_REDDIT": json.dumps({"maxPostsCount": 250})},
             clear=False,
         ):
             self.assertEqual(
-                _actor_input("instagram")["searchLimit"],
+                _actor_input("reddit")["maxPostsCount"],
                 MAX_RESULTS_PER_SOURCE,
             )
         self.assertEqual(
-            _actor_input("instagram")["search"],
-            "Dakar, Senegal",
+            _actor_input("reddit")["searchTerms"],
+            ["Senegal", "Sénégal"],
         )
-        self.assertEqual(_actor_input("instagram")["searchType"], "place")
+        self.assertFalse(_actor_input("reddit")["searchComments"])
+        self.assertEqual(_actor_input("reddit")["maxPostsCount"], 17)
 
     def test_normalize_items_deduplicates_repeated_publication_urls(self):
         items = [
@@ -137,15 +148,40 @@ class DataPipelineTests(unittest.TestCase):
             cleaned = clean_csv_rows([row], Path(directory))
         self.assertEqual(cleaned[0]["capture_locale"], "")
 
+    def test_reddit_images_can_be_archived_from_reddit_hosts(self):
+        response = unittest.mock.MagicMock()
+        response.__enter__.return_value.headers.get_content_type.return_value = "image/jpeg"
+        response.__enter__.return_value.headers.get.return_value = None
+        response.__enter__.return_value.read.return_value = b"image-data"
+        opener = unittest.mock.MagicMock()
+        opener.open.return_value = response
+        with tempfile.TemporaryDirectory() as directory, patch(
+            "export_collection.urllib.request.build_opener",
+            return_value=opener,
+        ):
+            output = _download_image(
+                "reddit",
+                "https://i.redd.it/senegal.jpg",
+                Path(directory) / "reddit-1",
+            )
+            rejected = _download_image(
+                "reddit",
+                "https://images.example/senegal.jpg",
+                Path(directory) / "reddit-2",
+            )
+            self.assertEqual(output.read_bytes(), b"image-data")
+            self.assertEqual(output.suffix, ".jpg")
+            self.assertIsNone(rejected)
+
     def test_actor_token_uses_authorization_header(self):
         response = unittest.mock.MagicMock()
         response.__enter__.return_value.read.return_value = b"[]"
         with patch.dict(
             os.environ,
-            {"APIFY_ACTOR_INSTAGRAM": "my-account~my-actor"},
+            {"APIFY_ACTOR_REDDIT": "my-account~my-actor"},
             clear=False,
         ), patch("data_pipeline.urllib.request.urlopen", return_value=response) as urlopen:
-            self.assertEqual(_run_actor("instagram", "test-secret-token"), [])
+            self.assertEqual(_run_actor("reddit", "test-secret-token"), [])
 
         request = urlopen.call_args.args[0]
         self.assertNotIn("test-secret-token", request.full_url)
@@ -166,27 +202,27 @@ class DataPipelineTests(unittest.TestCase):
             urlopen.call_args.args[0].full_url,
         )
 
-    def test_instagram_uses_search_actor_by_default(self):
+    def test_reddit_uses_reddit_scraper_actor_by_default(self):
         response = unittest.mock.MagicMock()
         response.__enter__.return_value.read.return_value = b"[]"
-        with patch.dict(os.environ, {"APIFY_ACTOR_INSTAGRAM": ""}, clear=False), patch(
+        with patch.dict(os.environ, {"APIFY_ACTOR_REDDIT": ""}, clear=False), patch(
             "data_pipeline.urllib.request.urlopen",
             return_value=response,
         ) as urlopen:
-            self.assertEqual(_run_actor("instagram", "test-secret-token"), [])
+            self.assertEqual(_run_actor("reddit", "test-secret-token"), [])
         self.assertIn(
-            "/acts/apify~instagram-search-scraper/",
+            "/acts/harshmaur~reddit-scraper/",
             urlopen.call_args.args[0].full_url,
         )
 
     def test_save_and_load_results(self):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "instance" / "collectes.json"
-            expected = {"instagram": {"label": "Instagram", "records": [], "error": None}}
+            expected = {"reddit": {"label": "Reddit", "records": [], "error": None}}
 
             save_results(expected, path)
 
-            self.assertEqual(load_results(path)["instagram"]["records"], [])
+            self.assertEqual(load_results(path)["reddit"]["records"], [])
 
     def test_collection_page_and_empty_selection(self):
         app.config["TESTING"] = True
@@ -202,7 +238,7 @@ class DataPipelineTests(unittest.TestCase):
             ):
                 response = client.post(
                     "/collecte",
-                    data={"sources": ["instagram"], "confirm_costs": "yes"},
+                    data={"sources": ["reddit"], "confirm_costs": "yes"},
                 )
             self.assertEqual(response.status_code, 400)
             self.assertIn("COLLECT_ADMIN_PASSWORD", response.get_data(as_text=True))
@@ -217,7 +253,7 @@ class DataPipelineTests(unittest.TestCase):
             response = client.post(
                 "/collecte",
                 data={
-                    "sources": ["instagram"],
+                    "sources": ["reddit"],
                     "confirm_costs": "yes",
                     "collect_password": "wrong-password",
                 },
