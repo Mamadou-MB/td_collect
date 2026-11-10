@@ -12,6 +12,7 @@ from datetime import datetime, timezone
 
 
 APIFY_API = "https://api.apify.com/v2"
+MAX_RESULTS_PER_SOURCE = 20
 IMAGE_KEYS = re.compile(
     r"(image|photo|picture|thumbnail|thumb|media|display)", re.IGNORECASE
 )
@@ -23,11 +24,11 @@ SOURCES = {
         "actor_env": "APIFY_ACTOR_GOOGLE_MAPS",
         "input_env": "APIFY_INPUT_GOOGLE_MAPS",
         "max_charge_usd": "0.50",
-        "cost_hint": "environ 0,04 $ pour 10 lieux ; plafond 0,50 $",
+        "cost_hint": "environ 0,08 $ pour 20 lieux ; plafond 0,50 $",
         "default_input": {
             "searchStringsArray": ["restaurants"],
             "locationQuery": "Senegal",
-            "maxCrawledPlacesPerSearch": 10,
+            "maxCrawledPlacesPerSearch": MAX_RESULTS_PER_SOURCE,
             "language": "fr",
         },
     },
@@ -37,12 +38,12 @@ SOURCES = {
         "actor_env": "APIFY_ACTOR_INSTAGRAM",
         "input_env": "APIFY_INPUT_INSTAGRAM",
         "max_charge_usd": "0.10",
-        "cost_hint": "environ 0,027 $ pour 10 résultats ; plafond 0,10 $",
+        "cost_hint": "environ 0,054 $ pour 20 résultats ; plafond 0,10 $",
         "default_input": {
             "resultsType": "posts",
-            "search": "#senegal",
+            "search": "#senegal,#dakar",
             "searchType": "hashtag",
-            "resultsLimit": 10,
+            "resultsLimit": MAX_RESULTS_PER_SOURCE,
         },
     },
     "youtube": {
@@ -51,10 +52,10 @@ SOURCES = {
         "actor_env": "APIFY_ACTOR_YOUTUBE",
         "input_env": "APIFY_INPUT_YOUTUBE",
         "max_charge_usd": "0.10",
-        "cost_hint": "environ 0,04 $ pour 10 vidéos ; plafond 0,10 $",
+        "cost_hint": "environ 0,08 $ pour 20 vidéos ; plafond 0,10 $",
         "default_input": {
             "searchQueries": ["Sénégal Dakar"],
-            "maxResults": 10,
+            "maxResults": MAX_RESULTS_PER_SOURCE,
         },
     },
     "x": {
@@ -63,10 +64,10 @@ SOURCES = {
         "actor_env": "APIFY_ACTOR_X",
         "input_env": "APIFY_INPUT_X",
         "max_charge_usd": "0.10",
-        "cost_hint": "environ 0,004 $ pour 10 tweets ; plafond 0,10 $",
+        "cost_hint": "environ 0,008 $ pour 20 tweets ; plafond 0,10 $",
         "default_input": {
             "searchTerms": ["Senegal OR Sénégal"],
-            "maxItems": 10,
+            "maxItems": MAX_RESULTS_PER_SOURCE,
         },
     },
     "pinterest": {
@@ -75,10 +76,10 @@ SOURCES = {
         "actor_env": "APIFY_ACTOR_PINTEREST",
         "input_env": "APIFY_INPUT_PINTEREST",
         "max_charge_usd": "0.10",
-        "cost_hint": "environ 0,0025 $ pour 10 résumés ; plafond 0,10 $",
+        "cost_hint": "environ 0,0035 $ pour 20 résumés ; plafond 0,10 $",
         "default_input": {
             "search": "Sénégal Dakar",
-            "maxItems": 10,
+            "maxItems": MAX_RESULTS_PER_SOURCE,
             "getDetails": False,
         },
     },
@@ -174,7 +175,7 @@ def _record_for_image(item, image_url, source):
     }
 
 
-def normalize_items(items, source, limit=10):
+def normalize_items(items, source, limit=MAX_RESULTS_PER_SOURCE):
     """Keep only safe HTTPS image references; never copy the image itself."""
     records = []
     seen = set()
@@ -211,7 +212,7 @@ def _actor_input(source_key):
         "limit",
     ):
         if isinstance(actor_input.get(key), (int, float)):
-            actor_input[key] = min(max(int(actor_input[key]), 1), 10)
+            actor_input[key] = min(max(int(actor_input[key]), 1), MAX_RESULTS_PER_SOURCE)
     return actor_input
 
 
@@ -226,7 +227,7 @@ def _run_actor(source_key, token):
         {
             "format": "json",
             "clean": "true",
-            "limit": "10",
+            "limit": str(MAX_RESULTS_PER_SOURCE),
             "maxTotalChargeUsd": source["max_charge_usd"],
         }
     )

@@ -25,8 +25,16 @@
         .info { background: #e4f3f7; } .success { background: #e2f5e9; } .error { background: #fde8e7; }
         .record { overflow: hidden; padding: 0; }
         .record img { display: block; width: 100%; height: 190px; object-fit: cover; background: #e8eef4; }
+        .record[hidden], .source-section[hidden], .pagination[hidden] { display: none !important; }
         .record-body { padding: .85rem; }
         .record p { margin: .2rem 0 .6rem; }
+        .toolbar { display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; }
+        .toolbar input, .toolbar select { min-height: 42px; padding: .55rem .7rem; border: 1px solid #c7d2df; border-radius: 8px; font: inherit; }
+        .toolbar input { flex: 1 1 260px; }
+        .toolbar select { flex: 0 1 220px; background: white; }
+        .pagination { display: flex; justify-content: center; align-items: center; gap: 1rem; margin: 1rem 0; }
+        .pagination button:disabled { opacity: .5; cursor: not-allowed; }
+        .live-count { color: #60758a; }
         a { color: #075e70; }
         section { margin: 1.5rem 0; }
         footer { padding: 1rem 0; color: #60758a; font-size: .9rem; }
@@ -35,7 +43,7 @@
 <body>
     <header>
         <h1>Collecte de données publiques — Sénégal</h1>
-        <p>Application indépendante du projet Flask principal. Résultats enregistrés dans ce dossier.</p>
+        <p>Publications et images publiques liées au Sénégal · mise à jour par collecte Apify.</p>
     </header>
     <main>
         {% if not apify_configured %}
@@ -48,15 +56,29 @@
         {% if error %}<div class="alert error" role="alert">{{ error }}</div>{% endif %}
 
         <div class="stats">
-            <div class="panel"><strong>{{ total_records }}</strong>résultats enregistrés</div>
+            <div class="panel"><strong id="total-results">{{ total_records }}</strong>résultats affichés</div>
             <div class="panel"><strong>{{ saved_results|length }}</strong>sources interrogées</div>
-            <div class="panel"><strong>10 max.</strong>images par source</div>
+            <div class="panel"><strong>20 max.</strong>résultats par source</div>
         </div>
         <p><a href="{{ url_for('download_public_csv') }}">Télécharger le CSV public des résultats</a></p>
 
+        <section class="panel" aria-label="Recherche et filtres">
+            <h2>Explorer les résultats</h2>
+            <div class="toolbar">
+                <input type="search" id="search-results" placeholder="Rechercher un titre ou un mot-clé…" aria-label="Rechercher dans les résultats">
+                <select id="source-filter" aria-label="Filtrer par source">
+                    <option value="all">Toutes les plateformes</option>
+                    {% for key, source in sources.items() %}
+                        <option value="{{ key }}">{{ source.label }}</option>
+                    {% endfor %}
+                </select>
+                <span class="live-count" id="visible-count" aria-live="polite"></span>
+            </div>
+        </section>
+
         <section class="panel">
             <h2>Lancer une collecte Apify</h2>
-            <p class="muted">Les recherches sont limitées au Sénégal. Le plafond de dépense est appliqué par Actor ; confirmez avant de lancer.</p>
+            <p class="muted">Jusqu’à 20 résultats par plateforme. Estimation indicative : environ 0,23 $ pour les cinq ; plafond strict cumulé : 0,90 $ par collecte.</p>
             <form method="post">
                 <div class="form-grid">
                     {% for key, source in sources.items() %}
@@ -76,14 +98,14 @@
         </section>
 
         {% for key, result in saved_results.items() %}
-            <section>
+            <section class="source-section" data-section="{{ key }}">
                 <h2>{{ result.label }} <span class="muted">— {{ result.records|length }} résultat(s)</span></h2>
                 {% if result.error %}
                     <div class="alert error">{{ result.error }}</div>
                 {% elif result.records %}
                     <div class="records">
-                        {% for record in result.records[:10] %}
-                            <article class="record">
+                        {% for record in result.records[:20] %}
+                            <article class="record" data-source="{{ key }}">
                                 <a href="{{ record.image_url }}" target="_blank" rel="noopener noreferrer">
                                     <img src="{{ record.image_url }}" alt="Image publique — {{ result.label }}" loading="lazy" referrerpolicy="no-referrer">
                                 </a>
@@ -100,7 +122,67 @@
                 {% if result.collected_at %}<small class="muted">Collecte : {{ result.collected_at }}</small>{% endif %}
             </section>
         {% endfor %}
+        <div class="pagination" id="pagination" hidden>
+            <button type="button" id="previous-page">Précédent</button>
+            <span id="page-status" aria-live="polite"></span>
+            <button type="button" id="next-page">Suivant</button>
+        </div>
         <footer>WhatsApp, Facebook et TikTok sont exclus. Respectez les droits d’auteur, les conditions des plateformes et les règles applicables avant de réutiliser les données.</footer>
     </main>
+    <script>
+        (() => {
+            const pageSize = 12;
+            const cards = [...document.querySelectorAll(".record[data-source]")];
+            const sections = [...document.querySelectorAll(".source-section")];
+            const search = document.getElementById("search-results");
+            const sourceFilter = document.getElementById("source-filter");
+            const pagination = document.getElementById("pagination");
+            const pageStatus = document.getElementById("page-status");
+            const visibleCount = document.getElementById("visible-count");
+            const totalResults = document.getElementById("total-results");
+            let currentPage = 0;
+            let matches = cards;
+
+            function render() {
+                const query = search.value.trim().toLocaleLowerCase();
+                const source = sourceFilter.value;
+                matches = cards.filter((card) =>
+                    (source === "all" || card.dataset.source === source) &&
+                    card.textContent.toLocaleLowerCase().includes(query)
+                );
+                const pageCount = Math.ceil(matches.length / pageSize);
+                currentPage = Math.min(currentPage, Math.max(pageCount - 1, 0));
+                const start = currentPage * pageSize;
+                const visible = new Set(matches.slice(start, start + pageSize));
+
+                for (const card of cards) {
+                    card.hidden = !visible.has(card);
+                }
+                for (const section of sections) {
+                    section.hidden = !matches.some((card) =>
+                        card.closest(".source-section") === section
+                    );
+                }
+                totalResults.textContent = matches.length;
+                visibleCount.textContent = `${matches.length} résultat(s)`;
+                pagination.hidden = matches.length <= pageSize;
+                pageStatus.textContent = pageCount ? `Page ${currentPage + 1} / ${pageCount}` : "Aucun résultat";
+                document.getElementById("previous-page").disabled = currentPage === 0;
+                document.getElementById("next-page").disabled = currentPage >= pageCount - 1;
+            }
+
+            search.addEventListener("input", () => { currentPage = 0; render(); });
+            sourceFilter.addEventListener("change", () => { currentPage = 0; render(); });
+            document.getElementById("previous-page").addEventListener("click", () => {
+                currentPage = Math.max(0, currentPage - 1);
+                render();
+            });
+            document.getElementById("next-page").addEventListener("click", () => {
+                currentPage += 1;
+                render();
+            });
+            render();
+        })();
+    </script>
 </body>
 </html>

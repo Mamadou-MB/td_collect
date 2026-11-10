@@ -6,6 +6,7 @@ from pathlib import Path
 from unittest.mock import patch
 
 from data_pipeline import (
+    MAX_RESULTS_PER_SOURCE,
     _actor_input,
     _run_actor,
     load_results,
@@ -53,13 +54,17 @@ class DataPipelineTests(unittest.TestCase):
             "https://cdn.example/instagram-post.jpg",
         )
 
-    def test_actor_input_caps_result_count_at_ten(self):
+    def test_actor_input_caps_result_count_at_twenty(self):
         with patch.dict(
             "os.environ",
             {"APIFY_INPUT_INSTAGRAM": json.dumps({"maxItems": 250})},
             clear=False,
         ):
-            self.assertEqual(_actor_input("instagram")["maxItems"], 10)
+            self.assertEqual(
+                _actor_input("instagram")["maxItems"],
+                MAX_RESULTS_PER_SOURCE,
+            )
+        self.assertEqual(_actor_input("instagram")["search"], "#senegal,#dakar")
 
     def test_actor_token_uses_authorization_header(self):
         response = unittest.mock.MagicMock()
@@ -75,6 +80,7 @@ class DataPipelineTests(unittest.TestCase):
         self.assertNotIn("test-secret-token", request.full_url)
         self.assertEqual(request.get_header("Authorization"), "Bearer test-secret-token")
         self.assertIn("maxTotalChargeUsd=0.10", request.full_url)
+        self.assertIn("limit=20", request.full_url)
 
     def test_save_and_load_results(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -166,8 +172,16 @@ class DataPipelineTests(unittest.TestCase):
 
         self.assertEqual(dashboard.status_code, 200)
         self.assertIn(b"Public test result", dashboard.data)
+        self.assertIn(b"Explorer les r", dashboard.data)
+        self.assertIn(b"previous-page", dashboard.data)
+        self.assertIn(b"20 max.", dashboard.data)
         self.assertEqual(download.status_code, 200)
         self.assertIn(b"YouTube,Public test result", download_data)
+
+    def test_normalize_items_uses_twenty_result_default_cap(self):
+        items = [{"imageUrl": f"https://cdn.example/image-{index}.jpg"} for index in range(25)]
+        records = normalize_items(items, "YouTube")
+        self.assertEqual(len(records), MAX_RESULTS_PER_SOURCE)
 
 
 if __name__ == "__main__":

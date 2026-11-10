@@ -11,86 +11,149 @@
       },
       {
         "source": "Google Maps",
-        "title": "Sesa Lounge",
-        "source_url": "https://www.google.com/maps/search/?api=1&query=Sesa%20Lounge&query_place_id=ChIJnSlNgBINwQ4RcWov6hYFY78",
-        "image_url": "https://lh3.googleusercontent.com/grass-cs/AABkmLfbE6yenDN84xYJz1ui-esirayM-SvdnT8Yd69gZqsuewjlcV95-v8OyWIXNDWhApNqv12BQJRTsq4Muojnc-jdaqaUFgwx4uXoThMtA6jYSNyQ-XQejyYS0yO9uVQPt4sQOoBsMwnMQw8=w408-h306-k-no",
+        "title": "Chez Mela Restaurant",
+        "source_url": "https://www.google.com/maps/search/?api=1&query=Chez%20Mela%20Restaurant&query_place_id=ChIJszN8eWpN3Q4Rp10i6Mksz7o",
+        "image_url": "https://lh3.googleusercontent.com/grass-cs/AABkmLcUQizR79UM7I2oJYjd_YQzE1zz7rLMpE9Ei70T5NYcIJDoJbR9k8v0qIPVj7MY4PQMvyCEDukaWjcxadfBagj4Hd0XuokRKqmxAGf4JcBhucptw1vUOvvDhLC9QhPApjxuvTKtAIdpLgg=w426-h240-k-no",
         "published_at": ""
       },
       {
         "source": "Google Maps",
-        "title": "Nina Délices",
-        "source_url": "https://www.google.com/maps/search/?api=1&query=Nina%20D%C3%A9lices&query_place_id=ChIJB1Nq8GgNwQ4Rj0wldR64Ezs",
-        "image_url": "https://lh3.googleusercontent.com/grass-cs/AABkmLe5xwm1qapdci0qFXWgcRL-SXsdJCqUHYVUkBJFJzqmlcHkk3Gy8gk95Rl6m8VezUBfOgAEK10ElxbBmZz54hILuQkEm13XpiW5n7-J3aMkjY_gkycirPlocfmwoxcURVEFrmPpdNC3-IA2=w408-h306-k-no",
+        "title": "Chez Boum",
+        "source_url": "https://www.google.com/maps/search/?api=1&query=Chez%20Boum&query_place_id=ChIJs3iU6vPV6Q4RF6kpnZblsAs",
+        "image_url": "https://lh3.googleusercontent.com/grass-cs/AABkmLfH6O55Ev9NUe9F1e9lcszUxlPkU-irWWe2EI4DTF0Z8_lcAWOOUejA0JipKjtulUUUGSn1wKaq1nGveEuvIJq5NDigv0IEj9RnlnYW5q8LfWpzAa50dBQXZ8XGzJyUMF-fTcFz=w426-h240-k-no",
         "published_at": ""
       },
       {
         "source": "Google Maps",
-        "title": "Les dé_lices de Maman",
-        "source_url": "https://www.google.com/maps/search/?api=1&query=Les%20d%C3%A9_lices%20de%20Maman&query_place_id=ChIJbXayTQANwQ4RzGq9rI38weM",
-        "image_url": "https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=RWbbWO_BoACxtnXaAbZU_g&cb_client=search.gws-prod.grass&w=408&h=240&yaw=110.992294&pitch=0&thumbfov=100",
+        "title": "RESTAURANT SÉNÉGALAISE SINE SALOUM",
+        "source_url": "https://www.google.com/maps/search/?api=1&query=RESTAURANT%20S%C3%89N%C3%89GALAISE%20SINE%20SALOUM&query_place_id=ChIJKbT5MwCzwg4RZzG4aYAedoI",
+        "image_url": "https://lh3.googleusercontent.com/grass-cs/AABkmLdVSJdht0kfQ1Nz3S7x8iBfHDLqsf8E85w4Xv8V24UK9Mv-DB5V9-b0P-Bc6WwG4p5jBCiLGCbUMvPpDbdNQER5G0-dsznaJKM7kh4PJ01CqQiPlF3o54rY4WXVGTC71yTS2oGLXFJ4KimQ=w408-h408-k-no",
         "published_at": ""
       },
       {
         "source": "Google Maps",
-        "title": "NOMAD Restaurant Maristes",
-        "source_url": "https://www.google.com/maps/search/?api=1&query=NOMAD%20Restaurant%20Maristes&query_place_id=ChIJpYQP0DsNwQ4RWm6ADO-d2_U",
-        "image_url": "https://lh3.googleusercontent.com/grass-cs/AABkmLf4CSK9Y7JyhAqagwbRjDH2veUqtobEOoaWSx9TRcLaoY4oj2Pc3X3qbgJ28wnnum2cB8UHS_vlbPpDueK9uJXdPsqij1LzJG5VCJVH0i-IltcVY1WIPbdAaGo3qZl0gVgUQotQxQ=w408-h544-k-no",
+        "title": "Restaurant des Femmes de Soucouta",
+        "source_url": "https://www.google.com/maps/search/?api=1&query=Restaurant%20des%20Femmes%20de%20Soucouta&query_place_id=ChIJkaIoMwDV6Q4Rg1zYH2nHQLU",
+        "image_url": "https://lh3.googleusercontent.com/grass-cs/AABkmLfnNkROrnZ1dQpev_wMup32ierlOJTI5OF_hpHXbWudKs4C6KNHqYMXUZl-lolYOASumYPYGHHh-DK6w6CE_mG3J5uXVcVOxiuWNgWQ4Ttwv9KP75jbnJO0fN7eZNzZPmhnE2DCGGLnrNbS=w408-h544-k-no",
         "published_at": ""
       },
       {
         "source": "Google Maps",
-        "title": "Restaurant Fast Food Nioko Bok",
-        "source_url": "https://www.google.com/maps/search/?api=1&query=Restaurant%20Fast%20Food%20Nioko%20Bok&query_place_id=ChIJ3ZVgjs8MwQ4RqMkvbi_RVQQ",
-        "image_url": "https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=hzxOIjU8IdK8OoJqU48A6Q&cb_client=search.gws-prod.grass&w=408&h=240&yaw=229.37903&pitch=0&thumbfov=100",
+        "title": "Restaurant chez ken",
+        "source_url": "https://www.google.com/maps/search/?api=1&query=Restaurant%20chez%20ken&query_place_id=ChIJ7f3_tZhN3Q4R-pYz2tNOytM",
+        "image_url": "https://lh3.googleusercontent.com/grass-cs/AABkmLeq3qef2SpIu_EpdYPxDTxCRBaZ06hIl0G_5karJGOccfitd4WfcVZt-KJy3BwQ7z-Ddkl0RJfaAls3Kpnd_ugZDIYARWxK-Ax4N5k2zgvaxwcLgTHFXjWE-OSibHczbs2B7dS0rw=w408-h721-k-no",
         "published_at": ""
       },
       {
         "source": "Google Maps",
-        "title": "Fast Food Mppc",
-        "source_url": "https://www.google.com/maps/search/?api=1&query=Fast%20Food%20Mppc&query_place_id=ChIJd4mVsNoMwQ4RaMe4e2kG_ZA",
-        "image_url": "https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=M0PKwKJbJI4fp9Ty_Yxtng&cb_client=search.gws-prod.grass&w=408&h=240&yaw=295.28186&pitch=4.4464808&thumbfov=100",
+        "title": "Chez Cathy - Bar Resto Fast Food",
+        "source_url": "https://www.google.com/maps/search/?api=1&query=Chez%20Cathy%20-%20Bar%20Resto%20Fast%20Food&query_place_id=ChIJPe0N2pVN3Q4RadhiBN7Bd6E",
+        "image_url": "https://lh3.googleusercontent.com/grass-cs/AABkmLf34XrwIXJ2oHMeY6MCiqvzO5RpZFT2KYOkVOqKsd4MX2fgzXmwd0YHT-jN35-W67whmtNNoeschXa42cbg-olse50qzHRB_vMRq_toZTu5MOz2iH_pUmlPrfZ8z3bn8VEyTlhtfiUMXIFW=w408-h306-k-no",
         "published_at": ""
       },
       {
         "source": "Google Maps",
-        "title": "planete braisee",
-        "source_url": "https://www.google.com/maps/search/?api=1&query=planete%20braisee&query_place_id=ChIJzQryb6QNwQ4RXmL7_rnExaM",
-        "image_url": "https://lh3.googleusercontent.com/grass-cs/AABkmLfYt95oGg_kidAKgrBWNOH_Zkko5e9G3m9UXYReDgusJhE4TU2EuzY01jxxKMfLZ0e6x0R8fXTb6UA6K93TLLiYYdYZyNYcMgZfCJvks1vv5kMqqqBkfpDQ82DgtI0GiRbJRqYc48662iY=w408-h544-k-no",
+        "title": "Restaurant Sam",
+        "source_url": "https://www.google.com/maps/search/?api=1&query=Restaurant%20Sam&query_place_id=ChIJORy3dgDV6Q4R7PYV3E2xQPY",
+        "image_url": "https://lh3.googleusercontent.com/grass-cs/AABkmLc_qhcI1QX4Cjp9EM5VH2I1lY2JwQifnNxTztYZpJ79FsH3-3egFPS0I4ZBrtUWKtmo7JK4qgYEhvWMjjZQoSkZ25Fpl-eo06wZYJ6OQM0DUy200YlxRH8OvNKjlN4s-LDLiOc46g=w408-h306-k-no",
         "published_at": ""
       },
       {
         "source": "Google Maps",
-        "title": "Restaurant Fast-Food Chez Gasse",
-        "source_url": "https://www.google.com/maps/search/?api=1&query=Restaurant%20Fast-Food%20Chez%20Gasse&query_place_id=ChIJYfOkHAMNwQ4R6JyHJVhY6ds",
-        "image_url": "https://lh3.googleusercontent.com/grass-cs/AABkmLed_8q-HjKHBpDPgFzlYI24RJznEmgZm93_pf5I8dndEqxkhj_DAicH1ABFQAp2154ks1gep3DwaGHDc6atpXPzGky5uZXs4lm46DkpV9OwXplpjZoAi4qFSOOut18VBpeFAMcQ=w426-h240-k-no",
+        "title": "Restaurant Chez Christ",
+        "source_url": "https://www.google.com/maps/search/?api=1&query=Restaurant%20Chez%20Christ&query_place_id=ChIJ7_Bcmq5T3Q4RjHhX5-zzumk",
+        "image_url": "https://lh3.googleusercontent.com/grass-cs/AABkmLcvbZMlYdIhe_QdYDSiDu0sieFykOAEhwRBR4O9hhTBuPpCamzrl_1HD-231vFa3pZct5AikJIvI93osttGKuAT8eOT9XmSTM0x1yfPZN3RWnhY6L5zt6MypWElk8yP2c05vzAK2_GeUDw=w408-h544-k-no",
         "published_at": ""
       },
       {
         "source": "Google Maps",
-        "title": "KFC Autoroute",
-        "source_url": "https://www.google.com/maps/search/?api=1&query=KFC%20Autoroute&query_place_id=ChIJoUx5DAANwQ4Rxzk7RP01GLg",
-        "image_url": "https://lh3.googleusercontent.com/grass-cs/AABkmLee5RsC25Lmk3kSCg7-inYeXnP03GHXpMlPaan7KwHJ7QLzSFuEn9ExakdrDcp40XGZMJg9w2ded1tZqfpvWnUmgxOIld7bvbM3zHtqh9-cfICGTDirK8rsSJpXRoYrzHSXZsXogAJWr-f2=w408-h544-k-no",
+        "title": "Restaurant PAM Toubacouta",
+        "source_url": "https://www.google.com/maps/search/?api=1&query=Restaurant%20PAM%20Toubacouta&query_place_id=ChIJ9VXV82Jkwg4RXvW-8nNG0s0",
+        "image_url": "https://lh3.googleusercontent.com/grass-cs/AABkmLdu3cL3Ov2ucruMkTt4jEhzCsXLWUkW8iXjVUe2QagrcgkkS1H0g-SrGncQBz-3SrzQLaSc7cB3QVIJjaqh-FbdXLbsuQTu4LqrzToAU-b18I0_taoM9JeKjRdP4YdvOtjv0vHxVQ=w408-h306-k-no",
+        "published_at": ""
+      },
+      {
+        "source": "Google Maps",
+        "title": "Restaurant chez Maryam",
+        "source_url": "https://www.google.com/maps/search/?api=1&query=Restaurant%20chez%20Maryam&query_place_id=ChIJ16T8AgCtwg4RbPm-Of93gQc",
+        "image_url": "https://lh3.googleusercontent.com/grass-cs/AABkmLf_BRVtYOxBmx0m6q1QszFFvgpIcH4QTo3ae8D6twZxxupjsuCOcOwEqNHBA22qQM35ZHMBS56gKR16D9JEgotkdxJ_Q0Z5aM0XooR2bfnj3pif7ef2nXNue8Z3XGAjD6W6AqVOX6oi1Ux0=w519-h240-k-no",
+        "published_at": ""
+      },
+      {
+        "source": "Google Maps",
+        "title": "JAC TROPICAL LODGE",
+        "source_url": "https://www.google.com/maps/search/?api=1&query=JAC%20TROPICAL%20LODGE&query_place_id=ChIJdz-MKG5N3Q4RYjBHqP0DVUg",
+        "image_url": "https://lh3.googleusercontent.com/grass-cs/AABkmLfL9eOBpzDHf2i8b_TqZN4LgvszCVZ21c8p4D6_ibqfctkZhD_AymqMhqvsrH9ToqL8KcRgH1IPJN2P-arNnU4mAYvRyNsKhrksNB9LPQKGrH5OAOfyO5vWAGz8U5EflAaGM0WdGRC6oLgy=w425-h240-k-no",
+        "published_at": ""
+      },
+      {
+        "source": "Google Maps",
+        "title": "La Mangrove",
+        "source_url": "https://www.google.com/maps/search/?api=1&query=La%20Mangrove&query_place_id=ChIJMbBdTkbU6Q4RTMLMIF-78dM",
+        "image_url": "https://lh3.googleusercontent.com/grass-cs/AABkmLfQL235Hsm5DO1a9FKOYyoONCxsONHuHgwpsbwjRQch1-PAWwV85cy1kNQSV2Jz5Uo3vSAdjpF5Xxqd81uVpVtjYQjAXe3jAPsrfpMsW4vQjsCvcCtpuh66PbibnLrXBwesoJXhASZuuc4P=w426-h240-k-no",
+        "published_at": ""
+      },
+      {
+        "source": "Google Maps",
+        "title": "Restaurant Le Complexe De Karang",
+        "source_url": "https://www.google.com/maps/search/?api=1&query=Restaurant%20Le%20Complexe%20De%20Karang&query_place_id=ChIJtyvVOagv6A4RtVPCitKa2Ic",
+        "image_url": "https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=hlQ3Y_sIU4vd3sBKnnxtCg&cb_client=search.gws-prod.grass&w=408&h=240&yaw=30.939938&pitch=2.9692106&thumbfov=100",
+        "published_at": ""
+      },
+      {
+        "source": "Google Maps",
+        "title": "Restaurant Fast Food et Végétarien Chez Ass Senghor",
+        "source_url": "https://www.google.com/maps/search/?api=1&query=Restaurant%20Fast%20Food%20et%20V%C3%A9g%C3%A9tarien%20Chez%20Ass%20Senghor&query_place_id=ChIJj9vtH7_V6Q4RsZhtxvsiecQ",
+        "image_url": "https://lh3.googleusercontent.com/grass-cs/AABkmLfW78P7R_Sf-qSpEIvxl-fbQ3rxd-L5YmBFltQdM4I6thS8JRIPu5h44yBlo0wrAB-hBrZFetg0ea094CNhGwrmQNQGRzkgdG167IhAJIrk1Jf82-4la5B_IHHR6i5ct4KxEbbfIhaMhvkw=w408-h612-k-no",
+        "published_at": ""
+      },
+      {
+        "source": "Google Maps",
+        "title": "Restaurant Ndéye Sall",
+        "source_url": "https://www.google.com/maps/search/?api=1&query=Restaurant%20Nd%C3%A9ye%20Sall&query_place_id=ChIJPwJmDeFN3Q4RAhBUWtzvZ6g",
+        "image_url": "https://lh3.googleusercontent.com/grass-cs/AABkmLdCns6KbOvmUO4LjV9F7Qb5usKKu97QeN2h_I1IXMTYHCPI9-VjBYhMubhHoMON9_abHJRnqcbaLdGLQery2CiIkKM6sOcepJnal16UddMC-DaAw3EqBbVGrCUTlCBohEqCMopGhscujx0=w408-h306-k-no",
+        "published_at": ""
+      },
+      {
+        "source": "Google Maps",
+        "title": "La Parrilla",
+        "source_url": "https://www.google.com/maps/search/?api=1&query=La%20Parrilla&query_place_id=ChIJgw85jkpywQ4R44Ua8ItxzDE",
+        "image_url": "https://lh3.googleusercontent.com/grass-cs/AABkmLf3mvYCZUh3evhHF1vUh72ae-b7GPVvpXIKUPs3ssbCYov2425TP2UwSYtmT5WH_S45KmxLcLwbJORDAJsSHer_r7-cphTwgAwk5RixSCpTOSOldicmdm2VP2MzXprD3r2Jvo6n=w408-h306-k-no",
+        "published_at": ""
+      },
+      {
+        "source": "Google Maps",
+        "title": "Restaurant Le Lagon 1",
+        "source_url": "https://www.google.com/maps/search/?api=1&query=Restaurant%20Le%20Lagon%201&query_place_id=ChIJg7q5QrRzwQ4R6knglsiPfDI",
+        "image_url": "https://lh3.googleusercontent.com/grass-cs/AABkmLcJWN_iCT23Bb0uHho-wGdGGL_68uYRXrTiX02EPBFujOr46ynukCuFHhpF46XV5G9sKK6I06np11ZfnikM7N7Su0BJh74TMyOwZjRKyd7dtvf07dSy4nuj3C9gZMabvga0mRw=w408-h306-k-no",
         "published_at": ""
       }
     ],
     "error": null,
-    "collected_at": "2026-11-10T10:09:38.401443+00:00"
+    "collected_at": "2026-11-10T13:59:20.890426+00:00"
   },
   "instagram": {
     "label": "Instagram",
     "records": [],
     "error": null,
-    "collected_at": "2026-11-10T10:16:36.584686+00:00"
+    "collected_at": "2026-11-10T14:23:05.501441+00:00"
   },
   "youtube": {
     "label": "YouTube",
     "records": [
       {
         "source": "YouTube",
-        "title": "Joj dakar 2026 : au bout du suspense, le sénégal arrache l’or ! les joueurs réagissent",
-        "source_url": "https://www.youtube.com/watch?v=njpNkSIysoA",
-        "image_url": "https://i.ytimg.com/vi/njpNkSIysoA/maxresdefault.jpg",
-        "published_at": "2026-11-09T19:31:13.000Z"
+        "title": "Senegal Food Tour: 24 Hours of Unforgettable Cuisine | Epic Food Journeys with Mark Wiens | Nat Geo",
+        "source_url": "https://www.youtube.com/watch?v=D1GXUWUNeRE",
+        "image_url": "https://i.ytimg.com/vi/D1GXUWUNeRE/maxresdefault.jpg",
+        "published_at": "2026-03-03T14:00:17.000Z"
+      },
+      {
+        "source": "YouTube",
+        "title": "Dakar Sénégal, une ville vraiment époustouflante en Afrique de l'Ouest",
+        "source_url": "https://www.youtube.com/watch?v=tsx4TUJw5yA",
+        "image_url": "https://i.ytimg.com/vi/tsx4TUJw5yA/maxresdefault.jpg",
+        "published_at": "2024-04-27T17:06:13.000Z"
       },
       {
         "source": "YouTube",
@@ -108,38 +171,17 @@
       },
       {
         "source": "YouTube",
-        "title": "JOJ Dakar 2026: Basket à 3| le Sénégal médaillé en or chez les garçons et en bronze chez les filles",
-        "source_url": "https://www.youtube.com/watch?v=CRgV2ijJs-U",
-        "image_url": "https://i.ytimg.com/vi/CRgV2ijJs-U/maxresdefault.jpg",
-        "published_at": "2026-11-09T22:47:09.000Z"
+        "title": "Sénégal : des pluies diluviennes frappent l’est du pays",
+        "source_url": "https://www.youtube.com/watch?v=mEFx0J-xw5s",
+        "image_url": "https://i.ytimg.com/vi/mEFx0J-xw5s/maxresdefault.jpg",
+        "published_at": "2026-10-05T17:14:59.000Z"
       },
       {
         "source": "YouTube",
-        "title": "Dakar Sénégal, une ville vraiment époustouflante en Afrique de l'Ouest",
-        "source_url": "https://www.youtube.com/watch?v=tsx4TUJw5yA",
-        "image_url": "https://i.ytimg.com/vi/tsx4TUJw5yA/maxresdefault.jpg",
-        "published_at": "2024-04-27T17:06:13.000Z"
-      },
-      {
-        "source": "YouTube",
-        "title": "Vous n’allez pas croire que c’est Dakar, au Sénégal 🇸🇳 — On se croirait en Europe",
-        "source_url": "https://www.youtube.com/watch?v=HMARC3KF-BY",
-        "image_url": "https://i.ytimg.com/vi/HMARC3KF-BY/maxresdefault.jpg",
-        "published_at": "2026-06-12T09:24:47.000Z"
-      },
-      {
-        "source": "YouTube",
-        "title": "World City Dakar Senegal",
-        "source_url": "https://www.youtube.com/watch?v=RIKeneUYQcw",
-        "image_url": "https://i.ytimg.com/vi/RIKeneUYQcw/maxresdefault.jpg",
-        "published_at": "2026-04-04T09:03:35.000Z"
-      },
-      {
-        "source": "YouTube",
-        "title": "DAKAR SENEGAL: The Most Beautiful City in West Africa",
-        "source_url": "https://www.youtube.com/watch?v=t7FAbbG3JKA",
-        "image_url": "https://i.ytimg.com/vi/t7FAbbG3JKA/maxresdefault.jpg",
-        "published_at": "2024-04-20T17:28:24.000Z"
+        "title": "I Didn’t Expect Dakar to Be Like This…My first time in Senegal! WOW!",
+        "source_url": "https://www.youtube.com/watch?v=LUdhzmK12gY",
+        "image_url": "https://i.ytimg.com/vi/LUdhzmK12gY/maxresdefault.jpg",
+        "published_at": "2026-01-13T23:32:13.000Z"
       },
       {
         "source": "YouTube",
@@ -150,91 +192,245 @@
       },
       {
         "source": "YouTube",
+        "title": "Notre voyage au SENEGAL 🇸🇳 - Vlog (Dakar, Gorée, Désert de Lompoul...)",
+        "source_url": "https://www.youtube.com/watch?v=T9Cyuw1k6DM",
+        "image_url": "https://i.ytimg.com/vi/T9Cyuw1k6DM/maxresdefault.jpg",
+        "published_at": "2024-08-03T13:00:34.000Z"
+      },
+      {
+        "source": "YouTube",
+        "title": "Senegal New Futuristic Dream City is World Class #Senegal",
+        "source_url": "https://www.youtube.com/watch?v=xR_ZbF6gGTE",
+        "image_url": "https://i.ytimg.com/vi/xR_ZbF6gGTE/maxresdefault.jpg",
+        "published_at": "2026-11-03T15:00:38.000Z"
+      },
+      {
+        "source": "YouTube",
+        "title": "Is Dakar Senegal biggest mall the most beautiful in Africa ? ( mind blowing) 🇸🇳",
+        "source_url": "https://www.youtube.com/watch?v=u8BndF7lOTE",
+        "image_url": "https://i.ytimg.com/vi/u8BndF7lOTE/maxresdefault.jpg",
+        "published_at": "2026-05-29T13:17:36.000Z"
+      },
+      {
+        "source": "YouTube",
+        "title": "Dakar Senegal nightlife; I wasn't ready for this",
+        "source_url": "https://www.youtube.com/watch?v=zTFOEPBzcL0",
+        "image_url": "https://i.ytimg.com/vi/zTFOEPBzcL0/maxresdefault.jpg",
+        "published_at": "2025-09-14T16:30:11.000Z"
+      },
+      {
+        "source": "YouTube",
+        "title": "World City Dakar Senegal",
+        "source_url": "https://www.youtube.com/watch?v=RIKeneUYQcw",
+        "image_url": "https://i.ytimg.com/vi/RIKeneUYQcw/maxresdefault.jpg",
+        "published_at": "2026-04-04T09:03:35.000Z"
+      },
+      {
+        "source": "YouTube",
+        "title": "JOJ Dakar 2026 :Pape Thiaw et Absa Faye créent la sensation, le Sénégal décroche l’or et le bronze !",
+        "source_url": "https://www.youtube.com/watch?v=TZrri1g6lyc",
+        "image_url": "https://i.ytimg.com/vi/TZrri1g6lyc/maxresdefault.jpg",
+        "published_at": "2026-11-09T20:45:10.000Z"
+      },
+      {
+        "source": "YouTube",
+        "title": "DAKAR SENEGAL: The Most Beautiful City in West Africa",
+        "source_url": "https://www.youtube.com/watch?v=t7FAbbG3JKA",
+        "image_url": "https://i.ytimg.com/vi/t7FAbbG3JKA/maxresdefault.jpg",
+        "published_at": "2024-04-20T17:28:24.000Z"
+      },
+      {
+        "source": "YouTube",
+        "title": "Downtown Dakar, Senegal in 2025 (Shocking)",
+        "source_url": "https://www.youtube.com/watch?v=jgKH3yLC7bA",
+        "image_url": "https://i.ytimg.com/vi/jgKH3yLC7bA/maxresdefault.jpg",
+        "published_at": "2025-02-16T17:33:28.000Z"
+      },
+      {
+        "source": "YouTube",
+        "title": "Plongée au cœur de Dakar, métropole culturelle d’Afrique de l’Ouest - Documentaire Voyage - AMP",
+        "source_url": "https://www.youtube.com/watch?v=L5PPbmApaSA",
+        "image_url": "https://i.ytimg.com/vi/L5PPbmApaSA/maxresdefault.jpg",
+        "published_at": "2025-12-03T15:00:50.000Z"
+      },
+      {
+        "source": "YouTube",
         "title": "HOME SAND ADVANTAGE: Senegal takes beach wrestling gold at Dakar Youth Olympics",
         "source_url": "https://www.youtube.com/watch?v=TRUo_O-33P0",
         "image_url": "https://i.ytimg.com/vi/TRUo_O-33P0/maxresdefault.jpg",
         "published_at": "2026-11-09T20:21:52.000Z"
+      },
+      {
+        "source": "YouTube",
+        "title": "Dakar, Sénégal la Capitale côtière la plus élégante d’Afrique",
+        "source_url": "https://www.youtube.com/watch?v=TIomxJ0uh1Y",
+        "image_url": "https://i.ytimg.com/vi/TIomxJ0uh1Y/maxresdefault.jpg",
+        "published_at": "2026-05-12T07:51:21.000Z"
+      },
+      {
+        "source": "YouTube",
+        "title": "Vous n’allez pas croire que c’est Dakar, au Sénégal 🇸🇳 — On se croirait en Europe",
+        "source_url": "https://www.youtube.com/watch?v=HMARC3KF-BY",
+        "image_url": "https://i.ytimg.com/vi/HMARC3KF-BY/maxresdefault.jpg",
+        "published_at": "2026-06-12T09:24:47.000Z"
+      },
+      {
+        "source": "YouTube",
+        "title": "JOJ Dakar 2026: Basket à 3| le Sénégal médaillé en or chez les garçons et en bronze chez les filles",
+        "source_url": "https://www.youtube.com/watch?v=CRgV2ijJs-U",
+        "image_url": "https://i.ytimg.com/vi/CRgV2ijJs-U/maxresdefault.jpg",
+        "published_at": "2026-11-09T22:47:09.000Z"
       }
     ],
     "error": null,
-    "collected_at": "2026-11-10T10:09:38.401489+00:00"
+    "collected_at": "2026-11-10T13:59:20.890461+00:00"
   },
   "x": {
     "label": "X",
     "records": [
       {
         "source": "X",
-        "title": "🇸🇳 𝐏𝐏-𝟐𝟔 𝐀̀ 𝐃𝐎𝐇𝐀 | 𝐋𝐄 𝐒𝐄́𝐍𝐄́𝐆𝐀𝐋 𝐑𝐄𝐍𝐅𝐎𝐑𝐂𝐄 𝐒𝐎𝐍 𝐄𝐍𝐆𝐀𝐆𝐄𝐌𝐄𝐍𝐓 𝐀𝐔 𝐒𝐄𝐈𝐍 𝐃𝐄 𝐋’𝐔𝐈𝐓\n\nCe 9 novembre 2026, le Ministre des Télécommunications et du Numérique, M. Samba DIOUF, a conduit la délégation sénégalaise à l’ouverture de la Conférence de plénipotentiaires de l’@ITU à Doha.\nDès cette première journée, le Sénégal a engagé des rencontres bilatérales pour défendre sa candidature à la réélection au Conseil d",
-        "source_url": "https://x.com/mtngouvsn/status/2120096304734834735",
-        "image_url": "https://pbs.twimg.com/profile_images/2091229312275910656/edSGY2hr_normal.jpg",
-        "published_at": "Tue Nov 10 10:08:43 +0000 2026"
+        "title": "@amara_faitho The current minister and ministry of sports and youth development, the athletics federation of Nigeria, The NFF and all the  stakeholders involved in guiding this ones to Gold  in Morocco(  FIFA Women’s U17)  and Senegal (youth Olympic) should be  given their credit too.",
+        "source_url": "https://x.com/WorldFamousLuca/status/2120154093616525709",
+        "image_url": "https://pbs.twimg.com/profile_images/1761596440801927168/ZPqS_wL6_normal.jpg",
+        "published_at": "Tue Nov 10 13:58:21 +0000 2026"
       },
       {
         "source": "X",
-        "title": "🇸🇳 𝐏𝐏-𝟐𝟔 𝐀̀ 𝐃𝐎𝐇𝐀 | 𝐋𝐄 𝐒𝐄́𝐍𝐄́𝐆𝐀𝐋 𝐑𝐄𝐍𝐅𝐎𝐑𝐂𝐄 𝐒𝐎𝐍 𝐄𝐍𝐆𝐀𝐆𝐄𝐌𝐄𝐍𝐓 𝐀𝐔 𝐒𝐄𝐈𝐍 𝐃𝐄 𝐋’𝐔𝐈𝐓\n\nCe 9 novembre 2026, le Ministre des Télécommunications et du Numérique, M. Samba DIOUF, a conduit la délégation sénégalaise à l’ouverture de la Conférence de plénipotentiaires de l’@ITU à Doha.\nDès cette première journée, le Sénégal a engagé des rencontres bilatérales pour défendre sa candidature à la réélection au Conseil d",
-        "source_url": "https://x.com/mtngouvsn/status/2120096304734834735",
-        "image_url": "https://pbs.twimg.com/profile_banners/983332438486257665/1787423859",
-        "published_at": "Tue Nov 10 10:08:43 +0000 2026"
+        "title": "@amara_faitho The current minister and ministry of sports and youth development, the athletics federation of Nigeria, The NFF and all the  stakeholders involved in guiding this ones to Gold  in Morocco(  FIFA Women’s U17)  and Senegal (youth Olympic) should be  given their credit too.",
+        "source_url": "https://x.com/WorldFamousLuca/status/2120154093616525709",
+        "image_url": "https://pbs.twimg.com/profile_banners/947119368/1641994425",
+        "published_at": "Tue Nov 10 13:58:21 +0000 2026"
       },
       {
         "source": "X",
-        "title": "🇸🇳 𝐏𝐏-𝟐𝟔 𝐀̀ 𝐃𝐎𝐇𝐀 | 𝐋𝐄 𝐒𝐄́𝐍𝐄́𝐆𝐀𝐋 𝐑𝐄𝐍𝐅𝐎𝐑𝐂𝐄 𝐒𝐎𝐍 𝐄𝐍𝐆𝐀𝐆𝐄𝐌𝐄𝐍𝐓 𝐀𝐔 𝐒𝐄𝐈𝐍 𝐃𝐄 𝐋’𝐔𝐈𝐓\n\nCe 9 novembre 2026, le Ministre des Télécommunications et du Numérique, M. Samba DIOUF, a conduit la délégation sénégalaise à l’ouverture de la Conférence de plénipotentiaires de l’@ITU à Doha.\nDès cette première journée, le Sénégal a engagé des rencontres bilatérales pour défendre sa candidature à la réélection au Conseil d",
-        "source_url": "https://x.com/mtngouvsn/status/2120096304734834735",
-        "image_url": "https://x.com/mtngouvsn/status/2120096304734834735/photo/1",
-        "published_at": "Tue Nov 10 10:08:43 +0000 2026"
+        "title": "At least 21 dead after migrant boat sinks off Senegal coast https://t.co/qJ7kJcuAJU",
+        "source_url": "https://x.com/dailypost_uk/status/2120154005842313396",
+        "image_url": "https://pbs.twimg.com/profile_images/1823359179735916544/gq_vDJgJ_normal.jpg",
+        "published_at": "Tue Nov 10 13:58:00 +0000 2026"
       },
       {
         "source": "X",
-        "title": "🇸🇳 𝐏𝐏-𝟐𝟔 𝐀̀ 𝐃𝐎𝐇𝐀 | 𝐋𝐄 𝐒𝐄́𝐍𝐄́𝐆𝐀𝐋 𝐑𝐄𝐍𝐅𝐎𝐑𝐂𝐄 𝐒𝐎𝐍 𝐄𝐍𝐆𝐀𝐆𝐄𝐌𝐄𝐍𝐓 𝐀𝐔 𝐒𝐄𝐈𝐍 𝐃𝐄 𝐋’𝐔𝐈𝐓\n\nCe 9 novembre 2026, le Ministre des Télécommunications et du Numérique, M. Samba DIOUF, a conduit la délégation sénégalaise à l’ouverture de la Conférence de plénipotentiaires de l’@ITU à Doha.\nDès cette première journée, le Sénégal a engagé des rencontres bilatérales pour défendre sa candidature à la réélection au Conseil d",
-        "source_url": "https://x.com/mtngouvsn/status/2120096304734834735",
-        "image_url": "https://pbs.twimg.com/media/HWwYU4mWgAA_PID.jpg",
-        "published_at": "Tue Nov 10 10:08:43 +0000 2026"
+        "title": "At least 21 dead after migrant boat sinks off Senegal coast https://t.co/qJ7kJcuAJU",
+        "source_url": "https://x.com/dailypost_uk/status/2120154005842313396",
+        "image_url": "https://pbs.twimg.com/profile_banners/1760688432169525248/1723557682",
+        "published_at": "Tue Nov 10 13:58:00 +0000 2026"
       },
       {
         "source": "X",
-        "title": "🇸🇳 𝐏𝐏-𝟐𝟔 𝐀̀ 𝐃𝐎𝐇𝐀 | 𝐋𝐄 𝐒𝐄́𝐍𝐄́𝐆𝐀𝐋 𝐑𝐄𝐍𝐅𝐎𝐑𝐂𝐄 𝐒𝐎𝐍 𝐄𝐍𝐆𝐀𝐆𝐄𝐌𝐄𝐍𝐓 𝐀𝐔 𝐒𝐄𝐈𝐍 𝐃𝐄 𝐋’𝐔𝐈𝐓\n\nCe 9 novembre 2026, le Ministre des Télécommunications et du Numérique, M. Samba DIOUF, a conduit la délégation sénégalaise à l’ouverture de la Conférence de plénipotentiaires de l’@ITU à Doha.\nDès cette première journée, le Sénégal a engagé des rencontres bilatérales pour défendre sa candidature à la réélection au Conseil d",
-        "source_url": "https://x.com/mtngouvsn/status/2120096304734834735",
-        "image_url": "https://t.co/rMyajJVm6Y",
-        "published_at": "Tue Nov 10 10:08:43 +0000 2026"
+        "title": "At least 21 dead after migrant boat sinks off Senegal coast https://t.co/qJ7kJcuAJU",
+        "source_url": "https://x.com/dailypost_uk/status/2120154005842313396",
+        "image_url": "https://pbs.twimg.com/card_img/2119703248810516480/0KtICyaV?format=jpg&name=800x419",
+        "published_at": "Tue Nov 10 13:58:00 +0000 2026"
       },
       {
         "source": "X",
-        "title": "🇸🇳 𝐏𝐏-𝟐𝟔 𝐀̀ 𝐃𝐎𝐇𝐀 | 𝐋𝐄 𝐒𝐄́𝐍𝐄́𝐆𝐀𝐋 𝐑𝐄𝐍𝐅𝐎𝐑𝐂𝐄 𝐒𝐎𝐍 𝐄𝐍𝐆𝐀𝐆𝐄𝐌𝐄𝐍𝐓 𝐀𝐔 𝐒𝐄𝐈𝐍 𝐃𝐄 𝐋’𝐔𝐈𝐓\n\nCe 9 novembre 2026, le Ministre des Télécommunications et du Numérique, M. Samba DIOUF, a conduit la délégation sénégalaise à l’ouverture de la Conférence de plénipotentiaires de l’@ITU à Doha.\nDès cette première journée, le Sénégal a engagé des rencontres bilatérales pour défendre sa candidature à la réélection au Conseil d",
-        "source_url": "https://x.com/mtngouvsn/status/2120096304734834735",
-        "image_url": "https://pbs.twimg.com/media/HWwYU4iXUAA3t6-.jpg",
-        "published_at": "Tue Nov 10 10:08:43 +0000 2026"
+        "title": "At least 21 dead after migrant boat sinks off Senegal coast https://t.co/qJ7kJcuAJU",
+        "source_url": "https://x.com/dailypost_uk/status/2120154005842313396",
+        "image_url": "https://pbs.twimg.com/card_img/2119703248810516480/0KtICyaV?format=jpg&name=280x150",
+        "published_at": "Tue Nov 10 13:58:00 +0000 2026"
       },
       {
         "source": "X",
-        "title": "🇸🇳 𝐏𝐏-𝟐𝟔 𝐀̀ 𝐃𝐎𝐇𝐀 | 𝐋𝐄 𝐒𝐄́𝐍𝐄́𝐆𝐀𝐋 𝐑𝐄𝐍𝐅𝐎𝐑𝐂𝐄 𝐒𝐎𝐍 𝐄𝐍𝐆𝐀𝐆𝐄𝐌𝐄𝐍𝐓 𝐀𝐔 𝐒𝐄𝐈𝐍 𝐃𝐄 𝐋’𝐔𝐈𝐓\n\nCe 9 novembre 2026, le Ministre des Télécommunications et du Numérique, M. Samba DIOUF, a conduit la délégation sénégalaise à l’ouverture de la Conférence de plénipotentiaires de l’@ITU à Doha.\nDès cette première journée, le Sénégal a engagé des rencontres bilatérales pour défendre sa candidature à la réélection au Conseil d",
-        "source_url": "https://x.com/mtngouvsn/status/2120096304734834735",
-        "image_url": "https://pbs.twimg.com/media/HWwYU4rWcAAR_Sx.jpg",
-        "published_at": "Tue Nov 10 10:08:43 +0000 2026"
+        "title": "At least 21 dead after migrant boat sinks off Senegal coast https://t.co/qJ7kJcuAJU",
+        "source_url": "https://x.com/dailypost_uk/status/2120154005842313396",
+        "image_url": "https://pbs.twimg.com/card_img/2119703248810516480/0KtICyaV?format=jpg&name=600x600",
+        "published_at": "Tue Nov 10 13:58:00 +0000 2026"
       },
       {
         "source": "X",
-        "title": "🇸🇳 𝐏𝐏-𝟐𝟔 𝐀̀ 𝐃𝐎𝐇𝐀 | 𝐋𝐄 𝐒𝐄́𝐍𝐄́𝐆𝐀𝐋 𝐑𝐄𝐍𝐅𝐎𝐑𝐂𝐄 𝐒𝐎𝐍 𝐄𝐍𝐆𝐀𝐆𝐄𝐌𝐄𝐍𝐓 𝐀𝐔 𝐒𝐄𝐈𝐍 𝐃𝐄 𝐋’𝐔𝐈𝐓\n\nCe 9 novembre 2026, le Ministre des Télécommunications et du Numérique, M. Samba DIOUF, a conduit la délégation sénégalaise à l’ouverture de la Conférence de plénipotentiaires de l’@ITU à Doha.\nDès cette première journée, le Sénégal a engagé des rencontres bilatérales pour défendre sa candidature à la réélection au Conseil d",
-        "source_url": "https://x.com/mtngouvsn/status/2120096304734834735",
-        "image_url": "https://pbs.twimg.com/media/HWwYU4kX0AAsUT3.jpg",
-        "published_at": "Tue Nov 10 10:08:43 +0000 2026"
+        "title": "At least 21 dead after migrant boat sinks off Senegal coast https://t.co/qJ7kJcuAJU",
+        "source_url": "https://x.com/dailypost_uk/status/2120154005842313396",
+        "image_url": "https://pbs.twimg.com/card_img/2119703248810516480/0KtICyaV?format=jpg&name=386x202",
+        "published_at": "Tue Nov 10 13:58:00 +0000 2026"
       },
       {
         "source": "X",
-        "title": "@StefR78 @Jo_Fitou_ssi @Magelya777 Mon premier boss m’avait parlé des avions pour le Sénégal remplis de blanches. Il faut vraiment avoir faim…",
-        "source_url": "https://x.com/Nath29021/status/2120096258111185299",
-        "image_url": "https://pbs.twimg.com/profile_images/2076886526198185984/oSLog_fw_normal.jpg",
-        "published_at": "Tue Nov 10 10:08:32 +0000 2026"
+        "title": "At least 21 dead after migrant boat sinks off Senegal coast https://t.co/qJ7kJcuAJU",
+        "source_url": "https://x.com/dailypost_uk/status/2120154005842313396",
+        "image_url": "https://pbs.twimg.com/card_img/2119703248810516480/0KtICyaV?format=jpg&name=orig",
+        "published_at": "Tue Nov 10 13:58:00 +0000 2026"
       },
       {
         "source": "X",
-        "title": "@StefR78 @Jo_Fitou_ssi @Magelya777 Mon premier boss m’avait parlé des avions pour le Sénégal remplis de blanches. Il faut vraiment avoir faim…",
-        "source_url": "https://x.com/Nath29021/status/2120096258111185299",
-        "image_url": "https://pbs.twimg.com/profile_banners/779559594834165761/1722339106",
-        "published_at": "Tue Nov 10 10:08:32 +0000 2026"
+        "title": "At least 21 dead after migrant boat sinks off Senegal coast https://t.co/qJ7kJcuAJU",
+        "source_url": "https://x.com/dailypost_uk/status/2120154005842313396",
+        "image_url": "https://pbs.twimg.com/card_img/2119703248810516480/0KtICyaV?format=jpg&name=144x144",
+        "published_at": "Tue Nov 10 13:58:00 +0000 2026"
+      },
+      {
+        "source": "X",
+        "title": "At least 21 dead after migrant boat sinks off Senegal coast https://t.co/qJ7kJcuAJU",
+        "source_url": "https://x.com/dailypost_uk/status/2120154005842313396",
+        "image_url": "https://pbs.twimg.com/card_img/2119703248810516480/0KtICyaV?format=png&name=2048x2048_2_exp",
+        "published_at": "Tue Nov 10 13:58:00 +0000 2026"
+      },
+      {
+        "source": "X",
+        "title": "At least 21 dead after migrant boat sinks off Senegal coast https://t.co/qJ7kJcuAJU",
+        "source_url": "https://x.com/dailypost_uk/status/2120154005842313396",
+        "image_url": "https://pbs.twimg.com/card_img/2119703248810516480/0KtICyaV?format=jpg&name=600x314",
+        "published_at": "Tue Nov 10 13:58:00 +0000 2026"
+      },
+      {
+        "source": "X",
+        "title": "#ActionQuartier \n\n🎭 L’IFSL & SAFILEM PROD (Festival Leeboon) posent leurs valises à Diamaguène !\n\n📖 Thème : « Le conte, outil de jonction intergénérationnelle et de préservation de la dignité »\n\n🗓️ 12 Nov. 2026 - 17h\n📍 Centre ATT, Diamaguène\n🎟️ Entrée libre\n\n#SaintLouis #Ndar #Senegal",
+        "source_url": "https://x.com/IFSenegal_SL/status/2120153989387841960",
+        "image_url": "https://pbs.twimg.com/profile_images/1610255892649320453/0cgTqp0Y_normal.jpg",
+        "published_at": "Tue Nov 10 13:57:56 +0000 2026"
+      },
+      {
+        "source": "X",
+        "title": "#ActionQuartier \n\n🎭 L’IFSL & SAFILEM PROD (Festival Leeboon) posent leurs valises à Diamaguène !\n\n📖 Thème : « Le conte, outil de jonction intergénérationnelle et de préservation de la dignité »\n\n🗓️ 12 Nov. 2026 - 17h\n📍 Centre ATT, Diamaguène\n🎟️ Entrée libre\n\n#SaintLouis #Ndar #Senegal",
+        "source_url": "https://x.com/IFSenegal_SL/status/2120153989387841960",
+        "image_url": "https://pbs.twimg.com/profile_banners/918530207623077891/1697112167",
+        "published_at": "Tue Nov 10 13:57:56 +0000 2026"
+      },
+      {
+        "source": "X",
+        "title": "#ActionQuartier \n\n🎭 L’IFSL & SAFILEM PROD (Festival Leeboon) posent leurs valises à Diamaguène !\n\n📖 Thème : « Le conte, outil de jonction intergénérationnelle et de préservation de la dignité »\n\n🗓️ 12 Nov. 2026 - 17h\n📍 Centre ATT, Diamaguène\n🎟️ Entrée libre\n\n#SaintLouis #Ndar #Senegal",
+        "source_url": "https://x.com/IFSenegal_SL/status/2120153989387841960",
+        "image_url": "https://x.com/IFSenegal_SL/status/2120153989387841960/photo/1",
+        "published_at": "Tue Nov 10 13:57:56 +0000 2026"
+      },
+      {
+        "source": "X",
+        "title": "#ActionQuartier \n\n🎭 L’IFSL & SAFILEM PROD (Festival Leeboon) posent leurs valises à Diamaguène !\n\n📖 Thème : « Le conte, outil de jonction intergénérationnelle et de préservation de la dignité »\n\n🗓️ 12 Nov. 2026 - 17h\n📍 Centre ATT, Diamaguène\n🎟️ Entrée libre\n\n#SaintLouis #Ndar #Senegal",
+        "source_url": "https://x.com/IFSenegal_SL/status/2120153989387841960",
+        "image_url": "https://pbs.twimg.com/media/HWxJ4mbXAAAQlDp.jpg",
+        "published_at": "Tue Nov 10 13:57:56 +0000 2026"
+      },
+      {
+        "source": "X",
+        "title": "#ActionQuartier \n\n🎭 L’IFSL & SAFILEM PROD (Festival Leeboon) posent leurs valises à Diamaguène !\n\n📖 Thème : « Le conte, outil de jonction intergénérationnelle et de préservation de la dignité »\n\n🗓️ 12 Nov. 2026 - 17h\n📍 Centre ATT, Diamaguène\n🎟️ Entrée libre\n\n#SaintLouis #Ndar #Senegal",
+        "source_url": "https://x.com/IFSenegal_SL/status/2120153989387841960",
+        "image_url": "https://t.co/IoNXT2hKLu",
+        "published_at": "Tue Nov 10 13:57:56 +0000 2026"
+      },
+      {
+        "source": "X",
+        "title": "J'en ai tiré un atelier pour les dirigeants et managers de Côte d'Ivoire et du Sénégal : ce que vous déléguez à l'IA, ce que vous contrôlez, ce que vous refusez. La demi-journée se tient à Abidjan ou en visio ; la journée complète, en présentiel.\nhttps://t.co/1ICwNyxSLc",
+        "source_url": "https://x.com/djigane/status/2120153960195490127",
+        "image_url": "https://pbs.twimg.com/profile_images/2015694336386650112/hg333WQK_normal.jpg",
+        "published_at": "Tue Nov 10 13:57:49 +0000 2026"
+      },
+      {
+        "source": "X",
+        "title": "J'en ai tiré un atelier pour les dirigeants et managers de Côte d'Ivoire et du Sénégal : ce que vous déléguez à l'IA, ce que vous contrôlez, ce que vous refusez. La demi-journée se tient à Abidjan ou en visio ; la journée complète, en présentiel.\nhttps://t.co/1ICwNyxSLc",
+        "source_url": "https://x.com/djigane/status/2120153960195490127",
+        "image_url": "https://pbs.twimg.com/profile_banners/48975551/1769413965",
+        "published_at": "Tue Nov 10 13:57:49 +0000 2026"
+      },
+      {
+        "source": "X",
+        "title": "J'en ai tiré un atelier pour les dirigeants et managers de Côte d'Ivoire et du Sénégal : ce que vous déléguez à l'IA, ce que vous contrôlez, ce que vous refusez. La demi-journée se tient à Abidjan ou en visio ; la journée complète, en présentiel.\nhttps://t.co/1ICwNyxSLc",
+        "source_url": "https://x.com/djigane/status/2120153960195490127",
+        "image_url": "https://pbs.twimg.com/card_img/2120153852901023744/eVVILxnR?format=jpg&name=800x419",
+        "published_at": "Tue Nov 10 13:57:49 +0000 2026"
       }
     ],
     "error": null,
-    "collected_at": "2026-11-10T10:09:38.401507+00:00"
+    "collected_at": "2026-11-10T13:59:20.890468+00:00"
   },
   "pinterest": {
     "label": "Pinterest",
@@ -308,9 +504,79 @@
         "source_url": "https://www.pinterest.com/pin/e1_AfqPShzyfRi4iyL5xLWIVVktklLqRF1rZDwlrH6qYnugWrWgV7Lmqw/",
         "image_url": "https://i.pinimg.com/474x/ee/12/3c/ee123c9a33ab7f1fa31654d24aeaeabb.jpg",
         "published_at": ""
+      },
+      {
+        "source": "Pinterest",
+        "title": "",
+        "source_url": "https://www.pinterest.com/pin/e1_AfqPShzyfRi4iyL5xLWIVVktklLqRF1rZDwlrH6qYnugWrWgV7Lmqw/",
+        "image_url": "https://i.pinimg.com/736x/ee/12/3c/ee123c9a33ab7f1fa31654d24aeaeabb.jpg",
+        "published_at": ""
+      },
+      {
+        "source": "Pinterest",
+        "title": "",
+        "source_url": "https://www.pinterest.com/pin/e1_AfqPShzyfRi4iyL5xLWIVVktklLqRF1rZDwlrH6qYnugWrWgV7Lmqw/",
+        "image_url": "https://i.pinimg.com/originals/ee/12/3c/ee123c9a33ab7f1fa31654d24aeaeabb.jpg",
+        "published_at": ""
+      },
+      {
+        "source": "Pinterest",
+        "title": "One of the coolest looking statues in the world found in Dakar,Senegal",
+        "source_url": "https://www.pinterest.com/pin/e1_AfqPShzKB6X8t6Fd0od6J_wYc7FeWDg29qHOfsMmb9U320PkYJBW/",
+        "image_url": "https://i.pinimg.com/236x/6a/20/4a/6a204a439db19aa9b8fcd0d02ee951a0.jpg",
+        "published_at": ""
+      },
+      {
+        "source": "Pinterest",
+        "title": "One of the coolest looking statues in the world found in Dakar,Senegal",
+        "source_url": "https://www.pinterest.com/pin/e1_AfqPShzKB6X8t6Fd0od6J_wYc7FeWDg29qHOfsMmb9U320PkYJBW/",
+        "image_url": "https://i.pinimg.com/474x/6a/20/4a/6a204a439db19aa9b8fcd0d02ee951a0.jpg",
+        "published_at": ""
+      },
+      {
+        "source": "Pinterest",
+        "title": "One of the coolest looking statues in the world found in Dakar,Senegal",
+        "source_url": "https://www.pinterest.com/pin/e1_AfqPShzKB6X8t6Fd0od6J_wYc7FeWDg29qHOfsMmb9U320PkYJBW/",
+        "image_url": "https://i.pinimg.com/736x/6a/20/4a/6a204a439db19aa9b8fcd0d02ee951a0.jpg",
+        "published_at": ""
+      },
+      {
+        "source": "Pinterest",
+        "title": "One of the coolest looking statues in the world found in Dakar,Senegal",
+        "source_url": "https://www.pinterest.com/pin/e1_AfqPShzKB6X8t6Fd0od6J_wYc7FeWDg29qHOfsMmb9U320PkYJBW/",
+        "image_url": "https://i.pinimg.com/originals/6a/20/4a/6a204a439db19aa9b8fcd0d02ee951a0.jpg",
+        "published_at": ""
+      },
+      {
+        "source": "Pinterest",
+        "title": "Dakar sénegal avec vue sur la Mer",
+        "source_url": "https://www.pinterest.com/pin/e1_AfqPShyolQVoGAErCk5kEkZWvNxfjsEHR9ZrOqZ3GxaOeJmqOBhxaw/",
+        "image_url": "https://i.pinimg.com/236x/5c/74/5e/5c745eb93472f04d343ada5ff23c3caf.jpg",
+        "published_at": ""
+      },
+      {
+        "source": "Pinterest",
+        "title": "Dakar sénegal avec vue sur la Mer",
+        "source_url": "https://www.pinterest.com/pin/e1_AfqPShyolQVoGAErCk5kEkZWvNxfjsEHR9ZrOqZ3GxaOeJmqOBhxaw/",
+        "image_url": "https://i.pinimg.com/474x/5c/74/5e/5c745eb93472f04d343ada5ff23c3caf.jpg",
+        "published_at": ""
+      },
+      {
+        "source": "Pinterest",
+        "title": "Dakar sénegal avec vue sur la Mer",
+        "source_url": "https://www.pinterest.com/pin/e1_AfqPShyolQVoGAErCk5kEkZWvNxfjsEHR9ZrOqZ3GxaOeJmqOBhxaw/",
+        "image_url": "https://i.pinimg.com/736x/5c/74/5e/5c745eb93472f04d343ada5ff23c3caf.jpg",
+        "published_at": ""
+      },
+      {
+        "source": "Pinterest",
+        "title": "Dakar sénegal avec vue sur la Mer",
+        "source_url": "https://www.pinterest.com/pin/e1_AfqPShyolQVoGAErCk5kEkZWvNxfjsEHR9ZrOqZ3GxaOeJmqOBhxaw/",
+        "image_url": "https://i.pinimg.com/originals/5c/74/5e/5c745eb93472f04d343ada5ff23c3caf.png",
+        "published_at": ""
       }
     ],
     "error": null,
-    "collected_at": "2026-11-10T10:09:38.401522+00:00"
+    "collected_at": "2026-11-10T13:59:20.890477+00:00"
   }
 }

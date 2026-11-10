@@ -7,10 +7,10 @@ import urllib.error
 import urllib.parse
 import urllib.request
 
-from data_pipeline import SOURCES, _https_url
+from data_pipeline import MAX_RESULTS_PER_SOURCE, SOURCES, _https_url
 
 
-MAX_IMAGES_PER_SOURCE = 10
+MAX_IMAGES_PER_SOURCE = MAX_RESULTS_PER_SOURCE
 MAX_IMAGE_BYTES = 5 * 1024 * 1024
 ALLOWED_IMAGE_HOSTS = {
     "google_maps": ("googleusercontent.com", "gstatic.com"),
@@ -139,7 +139,7 @@ h2 span{{font-size:.85rem;color:#52677d;font-weight:normal}}
 .no-image{{display:grid;place-items:center;height:190px;background:#edf2f7}}
 </style></head>
 <body><header><h1>Collecte de données publiques — Sénégal</h1>
-<p>Tableau de bord local des résultats collectés. Maximum 10 images par source.</p>{csv_link}</header>
+<p>Tableau de bord local des résultats collectés. Maximum {MAX_IMAGES_PER_SOURCE} images par source.</p>{csv_link}</header>
 <main><div class="summary"><div class="panel"><strong>{len(rows)}</strong><br>résultats CSV</div>
 <div class="panel"><strong>{sum(bool(x) for x in capture_paths.values())}</strong><br>images archivées localement</div>
 <div class="panel"><strong>{len(results)}</strong><br>sources interrogées</div></div>

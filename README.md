@@ -22,7 +22,7 @@ Le fichier `.env` local contient des secrets : gardez `APIFY_TOKEN` et
 visiteurs d’un déploiement public de lancer des Actors à vos frais.
 
 La collecte se fait sur demande, avec confirmation explicite des coûts affichés.
-Chaque Actor est limité à 10 résultats et chaque collecte applique le plafond
+Chaque Actor est limité à 20 résultats et chaque collecte applique le plafond
 de dépense configuré dans `data_pipeline.py`.
 
 ## Déploiement Docker
@@ -63,6 +63,9 @@ collectées ; ne collectez ou ne publiez que ce que vous êtes autorisé à trai
 Le dépôt contient `public/collectes.json` et `public/donnees_scrappees.csv` pour
 afficher les résultats initiaux après le déploiement. Le CSV et ses textes/liens
 seront publics sur le site.
+
+La collecte est réglée sur 20 résultats par source. L’estimation pour les cinq
+sources est d’environ 0,23 USD, avec un plafond strict de 0,90 USD par lancement.
 
 Dans le Web Service Render relié à ce dépôt, configurez :
 
