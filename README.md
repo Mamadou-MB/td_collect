@@ -33,14 +33,17 @@ documente l'instantané actuel (78 lignes avant
 déduplication, 47 lignes uniques après) ; ces chiffres ne changent pas
 automatiquement après une nouvelle collecte.
 
-Instagram utilise l'Actor [Instagram Hashtag Scraper](https://apify.com/apify/instagram-hashtag-scraper)
-avec les hashtags `senegal` et `dakar`. Le tarif gratuit actuellement indiqué
-est de 0,0026 USD par résultat ; le plafond du pipeline reste fixé à 0,10 USD
-pour cette source. X utilise l'Actor `apidojo~twitter-scraper-lite` ; les autres
-Actors restent inchangés. Si `APIFY_ACTOR_INSTAGRAM` ou
-`APIFY_INPUT_INSTAGRAM` est défini sur Render, sa valeur remplace celle du code :
-mettez ces variables à jour avec le nouvel Actor et le schéma `hashtags`, ou
-supprimez-les pour utiliser les paramètres par défaut.
+Instagram utilise désormais l'Actor [Instagram Search Scraper](https://apify.com/apify/instagram-search-scraper),
+configuré pour les lieux avec `search="Dakar, Senegal"`, `searchType="place"`
+et une limite de 50. Ce type de recherche fournit des lieux et leurs publications
+récentes, contrairement à la recherche de hashtags qui fournit principalement
+des métadonnées de hashtags. Le tarif gratuit actuellement indiqué est de 0,0027 USD par résultat ;
+le plafond strict du pipeline reste de 0,10 USD pour cette source (environ 37
+résultats au plus à ce tarif). X utilise l'Actor `apidojo~twitter-scraper-lite` ;
+les autres Actors restent inchangés. Si `APIFY_ACTOR_INSTAGRAM` ou
+`APIFY_INPUT_INSTAGRAM` est défini sur Render, cette valeur remplace celle du
+code : mettez ces variables à jour avec l'identifiant et le schéma de recherche
+ci-dessus, ou supprimez-les pour utiliser les paramètres par défaut.
 
 ## Déploiement Docker
 

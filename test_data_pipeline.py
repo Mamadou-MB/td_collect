@@ -58,18 +58,18 @@ class DataPipelineTests(unittest.TestCase):
     def test_actor_input_caps_result_count_at_fifty(self):
         with patch.dict(
             "os.environ",
-            {"APIFY_INPUT_INSTAGRAM": json.dumps({"resultsLimit": 250})},
+            {"APIFY_INPUT_INSTAGRAM": json.dumps({"searchLimit": 250})},
             clear=False,
         ):
             self.assertEqual(
-                _actor_input("instagram")["resultsLimit"],
+                _actor_input("instagram")["searchLimit"],
                 MAX_RESULTS_PER_SOURCE,
             )
         self.assertEqual(
-            _actor_input("instagram")["hashtags"],
-            ["senegal", "dakar"],
+            _actor_input("instagram")["search"],
+            "Dakar, Senegal",
         )
-        self.assertEqual(_actor_input("instagram")["resultsType"], "posts")
+        self.assertEqual(_actor_input("instagram")["searchType"], "place")
 
     def test_normalize_items_deduplicates_repeated_publication_urls(self):
         items = [
@@ -166,7 +166,7 @@ class DataPipelineTests(unittest.TestCase):
             urlopen.call_args.args[0].full_url,
         )
 
-    def test_instagram_uses_hashtag_actor_by_default(self):
+    def test_instagram_uses_search_actor_by_default(self):
         response = unittest.mock.MagicMock()
         response.__enter__.return_value.read.return_value = b"[]"
         with patch.dict(os.environ, {"APIFY_ACTOR_INSTAGRAM": ""}, clear=False), patch(
@@ -175,7 +175,7 @@ class DataPipelineTests(unittest.TestCase):
         ) as urlopen:
             self.assertEqual(_run_actor("instagram", "test-secret-token"), [])
         self.assertIn(
-            "/acts/apify~instagram-hashtag-scraper/",
+            "/acts/apify~instagram-search-scraper/",
             urlopen.call_args.args[0].full_url,
         )
 

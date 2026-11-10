@@ -34,15 +34,15 @@ SOURCES = {
     },
     "instagram": {
         "label": "Instagram",
-        "actor_id": "apify~instagram-hashtag-scraper",
+        "actor_id": "apify~instagram-search-scraper",
         "actor_env": "APIFY_ACTOR_INSTAGRAM",
         "input_env": "APIFY_INPUT_INSTAGRAM",
         "max_charge_usd": "0.10",
-        "cost_hint": "tarif gratuit affiché : 0,0026 $/résultat ; plafond 0,10 $",
+        "cost_hint": "tarif gratuit affiché : 0,0027 $/résultat ; plafond 0,10 $ (environ 37 résultats au plus)",
         "default_input": {
-            "hashtags": ["senegal", "dakar"],
-            "resultsType": "posts",
-            "resultsLimit": MAX_RESULTS_PER_SOURCE,
+            "search": "Dakar, Senegal",
+            "searchType": "place",
+            "searchLimit": MAX_RESULTS_PER_SOURCE,
         },
     },
     "youtube": {
@@ -217,6 +217,7 @@ def _actor_input(source_key):
         "maxResults",
         "maxTweets",
         "resultsLimit",
+        "searchLimit",
         "limit",
     ):
         if isinstance(actor_input.get(key), (int, float)):
