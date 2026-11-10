@@ -22,8 +22,15 @@ Le fichier `.env` local contient des secrets : gardez `APIFY_TOKEN` et
 visiteurs d’un déploiement public de lancer des Actors à vos frais.
 
 La collecte se fait sur demande, avec confirmation explicite des coûts affichés.
-Chaque Actor est limité à 20 résultats et chaque collecte applique le plafond
+Chaque Actor est limité à 50 résultats et chaque collecte applique le plafond
 de dépense configuré dans `data_pipeline.py`.
+
+Les recherches Instagram utilisent les URL publiques de hashtags `senegal` et
+`dakar`. X utilise l’Actor `apidojo~twitter-scraper-lite` ; les autres Actors
+restent inchangés car ils sont toujours maintenus. Si `APIFY_ACTOR_X` ou
+`APIFY_INPUT_INSTAGRAM` est défini dans `.env` ou sur Render, cette valeur
+remplace celle du code : mettez-la à jour ou supprimez-la pour appliquer les
+nouveaux réglages.
 
 ## Déploiement Docker
 
@@ -64,8 +71,10 @@ Le dépôt contient `public/collectes.json` et `public/donnees_scrappees.csv` po
 afficher les résultats initiaux après le déploiement. Le CSV et ses textes/liens
 seront publics sur le site.
 
-La collecte est réglée sur 20 résultats par source. L’estimation pour les cinq
-sources est d’environ 0,23 USD, avec un plafond strict de 0,90 USD par lancement.
+La collecte est réglée sur un maximum de 50 résultats uniques par source. Les
+doublons de liens de publication sont supprimés et les dates/URL du CSV sont
+normalisées. Les frais varient selon les Actors, avec un plafond strict cumulé
+de 0,90 USD par lancement.
 
 Dans le Web Service Render relié à ce dépôt, configurez :
 

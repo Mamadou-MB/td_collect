@@ -5,7 +5,13 @@ from pathlib import Path
 from dotenv import load_dotenv
 from flask import Flask, abort, jsonify, render_template, request, send_file
 
-from data_pipeline import SOURCES, collect, load_results, save_results
+from data_pipeline import (
+    MAX_RESULTS_PER_SOURCE,
+    SOURCES,
+    collect,
+    load_results,
+    save_results,
+)
 
 
 PROJECT_DIR = Path(__file__).resolve().parent
@@ -78,6 +84,7 @@ def dashboard():
     return render_template(
         "dashboard.html",
         sources=SOURCES,
+        max_results_per_source=MAX_RESULTS_PER_SOURCE,
         saved_results=saved_results,
         total_records=total_records,
         message=message,

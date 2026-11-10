@@ -58,7 +58,7 @@
         <div class="stats">
             <div class="panel"><strong id="total-results">{{ total_records }}</strong>résultats affichés</div>
             <div class="panel"><strong>{{ saved_results|length }}</strong>sources interrogées</div>
-            <div class="panel"><strong>20 max.</strong>résultats par source</div>
+            <div class="panel"><strong>{{ max_results_per_source }} max.</strong>résultats par source</div>
         </div>
         <p><a href="{{ url_for('download_public_csv') }}">Télécharger le CSV public des résultats</a></p>
 
@@ -78,7 +78,7 @@
 
         <section class="panel">
             <h2>Lancer une collecte Apify</h2>
-            <p class="muted">Jusqu’à 20 résultats par plateforme. Estimation indicative : environ 0,23 $ pour les cinq ; plafond strict cumulé : 0,90 $ par collecte.</p>
+            <p class="muted">Jusqu’à {{ max_results_per_source }} résultats par plateforme. Les frais réels varient selon les Actors ; plafond strict cumulé : 0,90 $ par collecte.</p>
             <form method="post">
                 <div class="form-grid">
                     {% for key, source in sources.items() %}
@@ -104,7 +104,7 @@
                     <div class="alert error">{{ result.error }}</div>
                 {% elif result.records %}
                     <div class="records">
-                        {% for record in result.records[:20] %}
+                        {% for record in result.records[:max_results_per_source] %}
                             <article class="record" data-source="{{ key }}">
                                 <a href="{{ record.image_url }}" target="_blank" rel="noopener noreferrer">
                                     <img src="{{ record.image_url }}" alt="Image publique — {{ result.label }}" loading="lazy" referrerpolicy="no-referrer">

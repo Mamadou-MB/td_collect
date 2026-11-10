@@ -3,15 +3,25 @@ import html
 import json
 import pathlib
 import re
+import unicodedata
 import urllib.error
 import urllib.parse
 import urllib.request
+from datetime import datetime, timezone
 
 from data_pipeline import MAX_RESULTS_PER_SOURCE, SOURCES, _https_url
 
 
 MAX_IMAGES_PER_SOURCE = MAX_RESULTS_PER_SOURCE
 MAX_IMAGE_BYTES = 5 * 1024 * 1024
+CSV_FIELDS = (
+    "source",
+    "titre",
+    "date_publication",
+    "url_publication",
+    "url_image",
+    "capture_locale",
+)
 ALLOWED_IMAGE_HOSTS = {
     "google_maps": ("googleusercontent.com", "gstatic.com"),
     "instagram": ("cdninstagram.com", "fbcdn.net"),
@@ -25,6 +35,86 @@ IMAGE_EXTENSIONS = {
     "image/webp": ".webp",
     "image/gif": ".gif",
 }
+
+
+def _clean_text(value):
+    if not isinstance(value, str):
+        return ""
+    value = unicodedata.normalize("NFC", value)
+    value = "".join(
+        " " if unicodedata.category(char) in {"Cc", "Cf"} else char
+        for char in value
+    )
+    return re.sub(r"\s+", " ", value).strip()
+
+
+def _clean_date(value):
+    value = _clean_text(value)
+    if not value:
+        return ""
+    try:
+        parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+    except ValueError:
+        try:
+            parsed = datetime.strptime(value, "%a %b %d %H:%M:%S %z %Y")
+        except ValueError:
+            return ""
+    if parsed.tzinfo is None:
+        parsed = parsed.replace(tzinfo=timezone.utc)
+    return parsed.astimezone(timezone.utc).isoformat(timespec="seconds").replace(
+        "+00:00", "Z"
+    )
+
+
+def clean_csv_rows(rows, capture_root=None):
+    """Normalize CSV cells, discard unsafe URLs, and remove duplicate posts."""
+    cleaned = []
+    seen = set()
+    for row in rows:
+        source = _clean_text(row.get("source"))
+        title = _clean_text(row.get("titre"))
+        source_url = _https_url(_clean_text(row.get("url_publication"))) or ""
+        image_url = _https_url(_clean_text(row.get("url_image"))) or ""
+        if not source or not (source_url or image_url):
+            continue
+        if title.startswith(("=", "+", "-", "@")):
+            title = "'" + title
+        identity_url = source_url or image_url
+        parsed = urllib.parse.urlsplit(identity_url)
+        identity = (
+            source.casefold(),
+            urllib.parse.urlunsplit(
+                (parsed.scheme.lower(), parsed.netloc.lower(), parsed.path, parsed.query, "")
+            ),
+        )
+        if identity in seen:
+            continue
+        seen.add(identity)
+
+        capture_value = _clean_text(row.get("capture_locale")).replace("\\", "/")
+        capture = pathlib.PurePosixPath(capture_value) if capture_value else None
+        capture_path = ""
+        if (
+            capture
+            and capture.as_posix() != "."
+            and not capture.is_absolute()
+            and ".." not in capture.parts
+        ):
+            capture_path = capture.as_posix()
+        if capture_path and capture_root is not None:
+            if not (pathlib.Path(capture_root) / pathlib.Path(*capture.parts)).is_file():
+                capture_path = ""
+        cleaned.append(
+            {
+                "source": source,
+                "titre": title,
+                "date_publication": _clean_date(row.get("date_publication")),
+                "url_publication": source_url,
+                "url_image": image_url,
+                "capture_locale": capture_path,
+            }
+        )
+    return cleaned
 
 
 class NoRedirectHandler(urllib.request.HTTPRedirectHandler):
@@ -194,11 +284,10 @@ def export_collection(
             )
         result["_local_capture_count"] = capture_count
 
+    rows = clean_csv_rows(rows, output_dir)
     csv_path = output_dir / "donnees_scrappees.csv"
     with csv_path.open("w", encoding="utf-8-sig", newline="") as csv_file:
-        writer = csv.DictWriter(csv_file, fieldnames=list(rows[0]) if rows else [
-            "source", "titre", "date_publication", "url_publication", "url_image", "capture_locale"
-        ])
+        writer = csv.DictWriter(csv_file, fieldnames=CSV_FIELDS, lineterminator="\n")
         writer.writeheader()
         writer.writerows(rows)
 

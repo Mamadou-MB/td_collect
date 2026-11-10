@@ -12,7 +12,7 @@ from datetime import datetime, timezone
 
 
 APIFY_API = "https://api.apify.com/v2"
-MAX_RESULTS_PER_SOURCE = 20
+MAX_RESULTS_PER_SOURCE = 50
 IMAGE_KEYS = re.compile(
     r"(image|photo|picture|thumbnail|thumb|media|display)", re.IGNORECASE
 )
@@ -24,7 +24,7 @@ SOURCES = {
         "actor_env": "APIFY_ACTOR_GOOGLE_MAPS",
         "input_env": "APIFY_INPUT_GOOGLE_MAPS",
         "max_charge_usd": "0.50",
-        "cost_hint": "environ 0,08 $ pour 20 lieux ; plafond 0,50 $",
+        "cost_hint": "plafond 0,50 $ par collecte",
         "default_input": {
             "searchStringsArray": ["restaurants"],
             "locationQuery": "Senegal",
@@ -38,11 +38,13 @@ SOURCES = {
         "actor_env": "APIFY_ACTOR_INSTAGRAM",
         "input_env": "APIFY_INPUT_INSTAGRAM",
         "max_charge_usd": "0.10",
-        "cost_hint": "environ 0,054 $ pour 20 résultats ; plafond 0,10 $",
+        "cost_hint": "plafond 0,10 $ par collecte",
         "default_input": {
+            "directUrls": [
+                "https://www.instagram.com/explore/tags/senegal/",
+                "https://www.instagram.com/explore/tags/dakar/",
+            ],
             "resultsType": "posts",
-            "search": "#senegal,#dakar",
-            "searchType": "hashtag",
             "resultsLimit": MAX_RESULTS_PER_SOURCE,
         },
     },
@@ -52,7 +54,7 @@ SOURCES = {
         "actor_env": "APIFY_ACTOR_YOUTUBE",
         "input_env": "APIFY_INPUT_YOUTUBE",
         "max_charge_usd": "0.10",
-        "cost_hint": "environ 0,08 $ pour 20 vidéos ; plafond 0,10 $",
+        "cost_hint": "plafond 0,10 $ par collecte",
         "default_input": {
             "searchQueries": ["Sénégal Dakar"],
             "maxResults": MAX_RESULTS_PER_SOURCE,
@@ -60,11 +62,11 @@ SOURCES = {
     },
     "x": {
         "label": "X",
-        "actor_id": "apidojo~tweet-scraper",
+        "actor_id": "apidojo~twitter-scraper-lite",
         "actor_env": "APIFY_ACTOR_X",
         "input_env": "APIFY_INPUT_X",
         "max_charge_usd": "0.10",
-        "cost_hint": "environ 0,008 $ pour 20 tweets ; plafond 0,10 $",
+        "cost_hint": "plafond 0,10 $ par collecte",
         "default_input": {
             "searchTerms": ["Senegal OR Sénégal"],
             "maxItems": MAX_RESULTS_PER_SOURCE,
@@ -76,7 +78,7 @@ SOURCES = {
         "actor_env": "APIFY_ACTOR_PINTEREST",
         "input_env": "APIFY_INPUT_PINTEREST",
         "max_charge_usd": "0.10",
-        "cost_hint": "environ 0,0035 $ pour 20 résumés ; plafond 0,10 $",
+        "cost_hint": "plafond 0,10 $ par collecte",
         "default_input": {
             "search": "Sénégal Dakar",
             "maxItems": MAX_RESULTS_PER_SOURCE,
@@ -141,6 +143,13 @@ def _image_urls(item):
     return found
 
 
+def _clean_text(value):
+    if not isinstance(value, str):
+        return ""
+    value = re.sub(r"[\x00-\x1f\x7f]+", " ", value)
+    return re.sub(r"\s+", " ", value).strip()
+
+
 def _record_for_image(item, image_url, source):
     title = next(
         (
@@ -168,10 +177,10 @@ def _record_for_image(item, image_url, source):
     )
     return {
         "source": source,
-        "title": title[:400],
+        "title": _clean_text(title)[:400],
         "source_url": source_url,
         "image_url": image_url,
-        "published_at": published_at[:80],
+        "published_at": _clean_text(published_at)[:80],
     }
 
 
@@ -183,10 +192,12 @@ def normalize_items(items, source, limit=MAX_RESULTS_PER_SOURCE):
         if not isinstance(item, dict):
             continue
         for image_url in _image_urls(item):
-            if image_url in seen:
+            record = _record_for_image(item, image_url, source)
+            identity = record["source_url"] or image_url
+            if identity in seen:
                 continue
-            seen.add(image_url)
-            records.append(_record_for_image(item, image_url, source))
+            seen.add(identity)
+            records.append(record)
             if len(records) >= limit:
                 return records
     return records
