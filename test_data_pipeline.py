@@ -90,13 +90,42 @@ class DataPipelineTests(unittest.TestCase):
             response = client.post("/collecte", data={"sources": []})
             self.assertEqual(response.status_code, 400)
             self.assertIn("Sélectionnez au moins une source.", response.get_data(as_text=True))
-            with patch.dict(os.environ, {"APIFY_TOKEN": ""}):
+            with patch.dict(
+                os.environ,
+                {"APIFY_TOKEN": "", "COLLECT_ADMIN_PASSWORD": ""},
+                clear=False,
+            ):
                 response = client.post(
                     "/collecte",
                     data={"sources": ["instagram"], "confirm_costs": "yes"},
                 )
             self.assertEqual(response.status_code, 400)
-            self.assertIn("Configurez APIFY_TOKEN", response.get_data(as_text=True))
+            self.assertIn("COLLECT_ADMIN_PASSWORD", response.get_data(as_text=True))
+
+    def test_collection_requires_admin_password(self):
+        app.config["TESTING"] = True
+        with app.test_client() as client, patch.dict(
+            os.environ,
+            {"COLLECT_ADMIN_PASSWORD": "expected-password"},
+            clear=False,
+        ):
+            response = client.post(
+                "/collecte",
+                data={
+                    "sources": ["instagram"],
+                    "confirm_costs": "yes",
+                    "collect_password": "wrong-password",
+                },
+            )
+        self.assertEqual(response.status_code, 400)
+        self.assertIn("Mot de passe de collecte incorrect.", response.get_data(as_text=True))
+
+    def test_health_check(self):
+        app.config["TESTING"] = True
+        with app.test_client() as client:
+            response = client.get("/healthz")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.get_json(), {"status": "ok"})
 
 
 if __name__ == "__main__":

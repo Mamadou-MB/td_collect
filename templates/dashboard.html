@@ -41,6 +41,9 @@
         {% if not apify_configured %}
             <div class="alert info">Ajoutez votre clé Apify dans le fichier local <code>.env</code>, puis redémarrez cette application. Ne collez pas la clé dans le navigateur ou dans un dépôt public.</div>
         {% endif %}
+        {% if not collection_enabled %}
+            <div class="alert info">Le tableau de bord est en lecture seule. Pour autoriser une collecte, configurez le secret privé <code>COLLECT_ADMIN_PASSWORD</code> sur l’hébergeur.</div>
+        {% endif %}
         {% if message %}<div class="alert success" role="status">{{ message }}</div>{% endif %}
         {% if error %}<div class="alert error" role="alert">{{ error }}</div>{% endif %}
 
@@ -66,7 +69,8 @@
                     {% endfor %}
                 </div>
                 <p><label><input type="checkbox" name="confirm_costs" value="yes" required> Je confirme les frais plafonnés affichés.</label></p>
-                <button type="submit">Démarrer la collecte</button>
+                <p><label>Mot de passe de collecte<br><input type="password" name="collect_password" autocomplete="current-password" required {% if not collection_enabled %}disabled{% endif %}></label></p>
+                <button type="submit" {% if not collection_enabled %}disabled{% endif %}>Démarrer la collecte</button>
             </form>
         </section>
 

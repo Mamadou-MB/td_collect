@@ -1,8 +1,9 @@
+import hmac
 import os
 from pathlib import Path
 
 from dotenv import load_dotenv
-from flask import Flask, render_template, request
+from flask import Flask, jsonify, render_template, request
 
 from data_pipeline import SOURCES, collect, load_results, save_results
 
@@ -11,7 +12,12 @@ PROJECT_DIR = Path(__file__).resolve().parent
 load_dotenv(PROJECT_DIR / ".env", override=False)
 
 app = Flask(__name__, template_folder=str(PROJECT_DIR / "templates"))
-COLLECTIONS_FILE = PROJECT_DIR / "instance" / "collectes.json"
+COLLECTIONS_FILE = Path(
+    os.environ.get(
+        "COLLECTIONS_FILE",
+        str(PROJECT_DIR / "instance" / "collectes.json"),
+    )
+)
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -22,12 +28,20 @@ def dashboard():
 
     if request.method == "POST":
         selected_sources = list(dict.fromkeys(request.form.getlist("sources")))
+        admin_password = os.environ.get("COLLECT_ADMIN_PASSWORD", "")
         if not selected_sources:
             error = "Sélectionnez au moins une source."
         elif any(source not in SOURCES for source in selected_sources):
             error = "Une source sélectionnée n’est pas valide."
         elif request.form.get("confirm_costs") != "yes":
             error = "Confirmez les coûts plafonnés avant de lancer les Actors."
+        elif not admin_password:
+            error = "La collecte est désactivée : le secret COLLECT_ADMIN_PASSWORD n’est pas configuré."
+        elif not hmac.compare_digest(
+            request.form.get("collect_password", ""),
+            admin_password,
+        ):
+            error = "Mot de passe de collecte incorrect."
         else:
             try:
                 results = collect(selected_sources)
@@ -55,8 +69,18 @@ def dashboard():
         message=message,
         error=error,
         apify_configured=bool(os.environ.get("APIFY_TOKEN", "").strip()),
+        collection_enabled=bool(os.environ.get("COLLECT_ADMIN_PASSWORD", "").strip()),
     ), (400 if error and request.method == "POST" else 200)
 
 
+@app.get("/healthz")
+def health_check():
+    return jsonify(status="ok")
+
+
 if __name__ == "__main__":
-    app.run(host="127.0.0.1", port=5001, debug=False)
+    app.run(
+        host="0.0.0.0",
+        port=int(os.environ.get("PORT", "5001")),
+        debug=False,
+    )

@@ -1,0 +1,13 @@
+.git
+.venv
+__pycache__
+*.py[cod]
+.env
+instance
+captures
+donnees_scrappees.csv
+analyse.txt
+tableau_de_bord.html
+dashboard_public.html
+test_data_pipeline.py
+export_collection.py

@@ -16,21 +16,50 @@ pip install -r requirements.txt
 python app.py
 ```
 
-Le dossier contient déjà `.env`. Gardez `APIFY_TOKEN` uniquement dans ce fichier
-local et ne le publiez pas. `.gitignore` exclut la clé, les captures et les
-exports contenant les données collectées.
+Le fichier `.env` local contient des secrets : gardez `APIFY_TOKEN` et
+`COLLECT_ADMIN_PASSWORD` hors de Git. La collecte est désactivée tant que
+`COLLECT_ADMIN_PASSWORD` n’est pas défini ; cette protection empêche les
+visiteurs d’un déploiement public de lancer des Actors à vos frais.
 
 La collecte se fait sur demande, avec confirmation explicite des coûts affichés.
 Chaque Actor est limité à 10 résultats et chaque collecte applique le plafond
 de dépense configuré dans `data_pipeline.py`.
 
-## Git et publication
+## Déploiement Docker
 
-Ce dossier est conçu pour devenir un dépôt Git distinct. Ne le poussez pas dans
-le dépôt `AlyCoto/African_Business_Company`, qui héberge un autre site.
+Prérequis : Docker installé, une clé API Apify et un volume persistant configuré
+chez l’hébergeur.
 
-L’application Flask nécessite un hébergeur Python pour être visible sur Internet.
-GitHub Pages ne peut publier que le résumé statique ; il n’exécute pas Flask.
-Avant une mise en ligne, retirer la clé et les données de collecte de tout
-commit, configurer `APIFY_TOKEN` comme secret de l’hébergeur et protéger le
-tableau de bord, car les données et les images peuvent concerner des personnes.
+1. Construisez puis démarrez le conteneur :
+
+   ```powershell
+   cd C:\Users\HP\Desktop\td_collect
+   docker build -t td-collect .
+   docker run --rm -p 8000:8000 `
+     -e APIFY_TOKEN="votre-cle-apify" `
+     -e COLLECT_ADMIN_PASSWORD="un-mot-de-passe-long-aleatoire" `
+     -e COLLECTIONS_FILE="/data/collectes.json" `
+     -v td-collect-data:/data `
+     td-collect
+   ```
+
+   Le tableau de bord est alors sur <http://localhost:8000> et la sonde de santé
+   sur <http://localhost:8000/healthz>. Ne mettez jamais les valeurs des secrets
+   dans un Dockerfile ou dans le dépôt ; sur un hébergeur, configurez-les dans
+   son gestionnaire de secrets.
+2. Sur un hébergeur Docker, définissez `APIFY_TOKEN` et
+   `COLLECT_ADMIN_PASSWORD` comme secrets, définissez `COLLECTIONS_FILE` sur un
+   chemin situé dans un volume persistant et publiez le port fourni par `PORT`.
+   Le conteneur utilise `PORT` lorsqu’il est défini et écoute sur toutes les
+   interfaces réseau.
+3. Configurez la sonde de santé avec le chemin `/healthz`.
+
+Sans volume persistant, les données collectées peuvent être perdues lors d’un
+redémarrage ou d’un nouveau déploiement. Le tableau de bord affiche les données
+collectées ; ne collectez ou ne publiez que ce que vous êtes autorisé à traiter.
+
+## Dépôt
+
+Le code applicatif est dans le dépôt Git séparé `Mamadou-MB/td_collect`.
+`.gitignore` et `.dockerignore` excluent le fichier `.env`, les résultats locaux,
+les images téléchargées et les exports du contexte public.
