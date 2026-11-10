@@ -3,7 +3,7 @@ import os
 from pathlib import Path
 
 from dotenv import load_dotenv
-from flask import Flask, jsonify, render_template, request
+from flask import Flask, abort, jsonify, render_template, request, send_file
 
 from data_pipeline import SOURCES, collect, load_results, save_results
 
@@ -18,6 +18,15 @@ COLLECTIONS_FILE = Path(
         str(PROJECT_DIR / "instance" / "collectes.json"),
     )
 )
+PUBLIC_SEED_FILE = PROJECT_DIR / "public" / "collectes.json"
+PUBLIC_CSV_FILE = PROJECT_DIR / "public" / "donnees_scrappees.csv"
+
+
+def _dashboard_results():
+    saved_results = load_results(COLLECTIONS_FILE)
+    if saved_results or not PUBLIC_SEED_FILE.is_file():
+        return saved_results
+    return load_results(PUBLIC_SEED_FILE)
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -36,7 +45,10 @@ def dashboard():
         elif request.form.get("confirm_costs") != "yes":
             error = "Confirmez les coûts plafonnés avant de lancer les Actors."
         elif not admin_password:
-            error = "La collecte est désactivée : le secret COLLECT_ADMIN_PASSWORD n’est pas configuré."
+            error = (
+                "La collecte est désactivée : le secret "
+                "COLLECT_ADMIN_PASSWORD n’est pas configuré."
+            )
         elif not hmac.compare_digest(
             request.form.get("collect_password", ""),
             admin_password,
@@ -44,6 +56,8 @@ def dashboard():
             error = "Mot de passe de collecte incorrect."
         else:
             try:
+                if not COLLECTIONS_FILE.exists() and PUBLIC_SEED_FILE.is_file():
+                    save_results(load_results(PUBLIC_SEED_FILE), COLLECTIONS_FILE)
                 results = collect(selected_sources)
                 save_results(results, COLLECTIONS_FILE)
                 message = "Collecte terminée. Les données locales ont été actualisées."
@@ -53,7 +67,7 @@ def dashboard():
                 error = str(exception)
 
     try:
-        saved_results = load_results(COLLECTIONS_FILE)
+        saved_results = _dashboard_results()
     except RuntimeError as exception:
         saved_results = {}
         error = str(exception)
@@ -76,6 +90,18 @@ def dashboard():
 @app.get("/healthz")
 def health_check():
     return jsonify(status="ok")
+
+
+@app.get("/donnees_scrappees.csv")
+def download_public_csv():
+    if not PUBLIC_CSV_FILE.is_file():
+        abort(404)
+    return send_file(
+        PUBLIC_CSV_FILE,
+        mimetype="text/csv; charset=utf-8",
+        as_attachment=True,
+        download_name="donnees_scrappees.csv",
+    )
 
 
 if __name__ == "__main__":

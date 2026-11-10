@@ -12,7 +12,9 @@ from data_pipeline import (
     normalize_items,
     save_results,
 )
-from app import app
+import app as app_module
+
+app = app_module.app
 
 
 class DataPipelineTests(unittest.TestCase):
@@ -126,6 +128,46 @@ class DataPipelineTests(unittest.TestCase):
             response = client.get("/healthz")
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.get_json(), {"status": "ok"})
+
+    def test_dashboard_uses_public_seed_and_serves_public_csv(self):
+        app.config["TESTING"] = True
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            seed_file = root / "collectes.json"
+            csv_file = root / "donnees_scrappees.csv"
+            seed_file.write_text(
+                json.dumps(
+                    {
+                        "youtube": {
+                            "label": "YouTube",
+                            "records": [
+                                {
+                                    "title": "Public test result",
+                                    "image_url": "https://i.ytimg.com/test.jpg",
+                                    "source_url": "https://youtube.com/watch?v=test",
+                                    "published_at": "",
+                                }
+                            ],
+                        }
+                    }
+                ),
+                encoding="utf-8",
+            )
+            csv_file.write_text("source,titre\nYouTube,Public test result\n", encoding="utf-8")
+            with patch.object(app_module, "COLLECTIONS_FILE", root / "missing.json"), patch.object(
+                app_module, "PUBLIC_SEED_FILE", seed_file
+            ), patch.object(app_module, "PUBLIC_CSV_FILE", csv_file):
+                with app.test_client() as client:
+                    dashboard = client.get("/")
+                    download = client.get("/donnees_scrappees.csv")
+                    download_data = download.data
+                    dashboard.close()
+                    download.close()
+
+        self.assertEqual(dashboard.status_code, 200)
+        self.assertIn(b"Public test result", dashboard.data)
+        self.assertEqual(download.status_code, 200)
+        self.assertIn(b"YouTube,Public test result", download_data)
 
 
 if __name__ == "__main__":

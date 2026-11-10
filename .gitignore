@@ -8,3 +8,5 @@ donnees_scrappees.csv
 analyse.txt
 tableau_de_bord.html
 dashboard_public.html
+!public/donnees_scrappees.csv
+!public/collectes.json

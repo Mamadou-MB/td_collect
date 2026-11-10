@@ -58,8 +58,27 @@ Sans volume persistant, les données collectées peuvent être perdues lors d’
 redémarrage ou d’un nouveau déploiement. Le tableau de bord affiche les données
 collectées ; ne collectez ou ne publiez que ce que vous êtes autorisé à traiter.
 
+## Render
+
+Le dépôt contient `public/collectes.json` et `public/donnees_scrappees.csv` pour
+afficher les résultats initiaux après le déploiement. Le CSV et ses textes/liens
+seront publics sur le site.
+
+Dans le Web Service Render relié à ce dépôt, configurez :
+
+- **Build Command** : `pip install -r requirements.txt`
+- **Start Command** : `gunicorn --bind 0.0.0.0:$PORT --workers 2 --timeout 240 app:app`
+- **Health Check Path** : `/healthz`
+- **Secret** `APIFY_TOKEN` : uniquement si de nouvelles collectes sont prévues.
+- **Secret** `COLLECT_ADMIN_PASSWORD` : mot de passe privé exigé pour lancer une
+  collecte ; sans lui, l’application reste en lecture seule.
+- **Persistent Disk** : montez le disque sur `/var/data`, puis définissez
+  `COLLECTIONS_FILE=/var/data/collectes.json` si les collectes effectuées sur
+  Render doivent survivre aux redéploiements.
+
 ## Dépôt
 
 Le code applicatif est dans le dépôt Git séparé `Mamadou-MB/td_collect`.
 `.gitignore` et `.dockerignore` excluent le fichier `.env`, les résultats locaux,
-les images téléchargées et les exports du contexte public.
+les images téléchargées et les exports bruts ; seuls le CSV et le JSON de départ
+dans `public/` sont suivis par Git et accessibles publiquement.
