@@ -11,6 +11,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY app.py data_pipeline.py ./
 COPY templates ./templates
 COPY public ./public
+COPY notebooks ./notebooks
 
 RUN useradd --create-home --uid 10001 appuser \
     && mkdir -p /data \
